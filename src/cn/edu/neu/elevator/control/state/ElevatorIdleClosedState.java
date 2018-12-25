@@ -2,6 +2,7 @@ package cn.edu.neu.elevator.control.state;
 
 import cn.edu.neu.elevator.actuator.DoorMotor;
 import cn.edu.neu.elevator.actuator.ElevatorMotor;
+import cn.edu.neu.elevator.display.GUIController;
 import cn.edu.neu.elevator.util.ElevatorLogger;
 
 public class ElevatorIdleClosedState extends ElevatorState{
@@ -24,14 +25,15 @@ public class ElevatorIdleClosedState extends ElevatorState{
 
     @Override
     public void onFloorButtonPressed(int floor) {
-        ElevatorMotor elevatorMotor = new ElevatorMotor();
         context.setDestinationFloor(floor);
         if (context.getCurrentFloor() < floor) {
-            elevatorMotor.goUp();
+            context.getElevatorMotor().goUp();
+            GUIController.getInstance().setElevatorStatus(false, "Going up");
             context.setCurrentElevatorState(context.ELEVATOR_GOING_UP_CLOSED_STATE);
         }
         else if (context.getCurrentFloor() > floor) {
-            elevatorMotor.goDown();
+            context.getElevatorMotor().goDown();
+            GUIController.getInstance().setElevatorStatus(false, "Going down");
             context.setCurrentElevatorState(context.ELEVATOR_GOING_DOWN_CLOSED_STATE);
         }
 

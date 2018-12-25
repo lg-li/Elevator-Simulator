@@ -7,7 +7,6 @@ import cn.edu.neu.elevator.display.GUIController;
 import cn.edu.neu.elevator.linstener.DoorSensorListener;
 import cn.edu.neu.elevator.linstener.ElevatorPanelListener;
 import cn.edu.neu.elevator.linstener.FloorSensorListener;
-import javafx.application.Platform;
 
 /**
  * Elevator controller class
@@ -82,6 +81,7 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
         ELEVATOR_GOING_DOWN_CLOSED_STATE.setContext(this);
         ELEVATOR_IDLE_OPEN_STATE.setContext(this);
         ELEVATOR_IDLE_CLOSED_STATE.setContext(this);
+        ELEVATOR_IDLE_CLOSING_STATE.setContext(this);
         ELEVATOR_IDLE_BLOCKED_STATE.setContext(this);
     }
 
@@ -106,19 +106,20 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
      */
     @Override
     public void onDoorClosed() {
+        GUIController.getInstance().setElevatorStatus(true, "Idle");
         GUIController.getInstance().setDoorStatus("Closed");
         currentElevatorState.onDoorClosed();
     }
 
     @Override
     public void onDoorOpen() {
+        GUIController.getInstance().setElevatorStatus(true, "Idle");
         GUIController.getInstance().setDoorStatus("Open");
         currentElevatorState.onDoorOpen();
     }
 
     @Override
     public void onDoorBlocked() {
-        GUIController.getInstance().setDoorStatus("Blocked");
         currentElevatorState.onDoorBlocked();
     }
 
@@ -141,6 +142,7 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
     public void onFloorReached() {
         currentElevatorState.onFloorReached(currentFloor, destinationFloor);
         GUIController.getInstance().setTxtFloorIndicator(currentFloor);
+        GUIController.getInstance().setSliderHeight(currentFloor);
     }
 
     @Override

@@ -101,15 +101,20 @@ public class GUIController {
             double newValue = sliderFloor.getValue() + diff;
             if (newValue < sliderFloor.getMin()) {
                 // too small value, set to minimum
-                sliderFloor.adjustValue(sliderFloor.getMin());
+                sliderFloor.setValue(sliderFloor.getMin());
             } else if (newValue > sliderFloor.getMax()) {
                 // too large value, set to maximum
-                sliderFloor.adjustValue(sliderFloor.getMax());
+                sliderFloor.setValue(sliderFloor.getMax());
             } else {
                 // valid value
-                sliderFloor.adjustValue(sliderFloor.getValue() + diff);
+                sliderFloor.setValue(newValue);
+                System.out.println("V=" + newValue);
             }
         });
+    }
+
+    public void setSliderHeight(double value){
+        Platform.runLater(()->sliderFloor.setValue(value));
     }
 
     /**

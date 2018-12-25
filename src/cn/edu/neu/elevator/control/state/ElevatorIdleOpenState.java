@@ -1,6 +1,7 @@
 package cn.edu.neu.elevator.control.state;
 
 import cn.edu.neu.elevator.actuator.DoorMotor;
+import cn.edu.neu.elevator.display.GUIController;
 import cn.edu.neu.elevator.util.ElevatorLogger;
 
 public class ElevatorIdleOpenState extends ElevatorState{
@@ -34,6 +35,7 @@ public class ElevatorIdleOpenState extends ElevatorState{
     public void onCloseButtonPressed() {
         DoorMotor doorMotor = new DoorMotor();
         doorMotor.goClose();
+        GUIController.getInstance().setElevatorStatus(false, "Closing door...");
         context.setCurrentElevatorState(context.ELEVATOR_IDLE_CLOSING_STATE);
     }
 
