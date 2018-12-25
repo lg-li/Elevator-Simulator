@@ -1,6 +1,7 @@
 @startuml
 
 interface Listener {
++ update(): void
 }
 
 interface DoorSensorListener {
@@ -23,6 +24,96 @@ Listener <|-down- DoorSensorListener
 Listener <|-down- ElevatorPanelListener
 Listener <|-down- FloorSensorListener
 
+class Listenable {
+# listeners: List<Listener>
++ attachListener(listener: Listener): void
++ detachListener(listener: Listener): void
++ notifyEvent(): void
+}
 
+class DoorSensor {
+- currentDoorState: DoorState
++ enum DoorState {OPEN,CLOSED,BLOCKED}
++ setCurrentDoorState(currentState: DoorState): void
++ notifyEvent(): void
+}
+
+class ElevatorPanel {
+- buttonPressed: ElevatorButton
++ press(buttonPressed: ElevatorButton): void
++ notifyEvent(): void
+}
+
+class FloorSensor {
++ floorReached(): void
++ notifyEvent(): void
+}
+
+Listenable <|-down- DoorSensor
+Listenable <|-down- ElevatorPanel
+Listenable <|-down- FloorSensor
+
+class Environment {
+- {static} INSTANCE: Environment
+- doorSensor: DoorSensor
+- elevatorPanel: ElevatorPanel
+- floorSensor: FloorSensor
++ {static} getInstance(): Environment
++ registerElevatorController(elevatorController: ElevatorController): void
++ pressButton(button: ElevatorButton)
++ closeDoor(): void
++ openDoor(): void
++ blockDoor(): void
+}
+
+
+class ElevatorButton {
+- buttonType: Button
+- buttonValue: int
++ enum ButtonType {OPEN_BUTTON, CLOSED_BUTTON, FLOOR_BUTTON}
++ <<create>> ElevatorButton(buttonType: ButtonType)
++ <<create>> ElevatorButton(buttonType: ButtonType, buttonValue: int)
+}
+
+ElevatorController ..> ElevatorButton
+
+class DoorMotor {
++ goOpen(): void
++ goClose(): void
++ goBreak(): void
+}
+
+class ElevatorMotor {
++ goUp(): void
++ goDown(): void
++ goBreak(): void
+}
+
+ElevatorController --> DoorMotor
+ElevatorController --> ElevatorMotor
+
+abstract class ElevatorState{
+}
+
+class IdleOpenState {
+}
+
+class IdleClosedState {
+}
+
+class IdleBlockedState {
+}
+
+class GoingUpClosedState {
+}
+
+class GoingDownClosedState {
+}
+
+ElevatorState <|-- IdleOpenState
+ElevatorState <|-- IdleClosedState
+ElevatorState <|-- IdleBlockedState
+ElevatorState <|-- GoingUpClosedState
+ElevatorState <|-- GoingDownClosedState
 
 @enduml

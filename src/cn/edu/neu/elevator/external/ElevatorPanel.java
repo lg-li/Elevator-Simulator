@@ -11,11 +11,11 @@ import java.util.List;
  */
 public class ElevatorPanel extends Listenable{
 
+    private ElevatorButton buttonPressed;
+
     public ElevatorPanel () {
         listeners = new ArrayList<>();
     }
-
-    private ElevatorButton buttonPressed;
 
     public void press(ElevatorButton buttonPressed) {
         this.buttonPressed = buttonPressed;

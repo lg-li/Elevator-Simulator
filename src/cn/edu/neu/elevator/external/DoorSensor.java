@@ -11,19 +11,20 @@ import java.util.List;
  */
 public class DoorSensor extends Listenable {
 
+
+    private DoorState currentDoorState;
     /**
      * 3 states for the door:
      * Open, closed and blocked
      */
     public enum DoorState {
-        OPEN, CLOSED, BLOCKED
+        OPEN, CLOSED, BLOCKED;
+
     }
 
     public DoorSensor() {
         currentDoorState = DoorState.CLOSED;
     }
-
-    private DoorState currentDoorState;
 
     public DoorState getCurrentDoorState() {
         return currentDoorState;

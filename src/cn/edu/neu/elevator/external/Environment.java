@@ -43,7 +43,7 @@ public class Environment {
     }
 
     public void floorReached(){
-        floorSensor.notifyEvent();
+        floorSensor.floorReached();
     }
 
     public void pressButton(ElevatorButton buttonPressed) {
@@ -52,16 +52,13 @@ public class Environment {
 
     public void closeDoor() {
         doorSensor.setCurrentDoorState(DoorState.CLOSED);
-        doorSensor.notifyEvent();
     }
 
     public void openDoor() {
         doorSensor.setCurrentDoorState(DoorState.OPEN);
-        doorSensor.notifyEvent();
     }
 
     public void blockDoor() {
         doorSensor.setCurrentDoorState(DoorState.BLOCKED);
-        doorSensor.notifyEvent();
     }
 }
