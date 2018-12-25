@@ -3,9 +3,11 @@ package cn.edu.neu.elevator.control;
 import cn.edu.neu.elevator.actuator.DoorMotor;
 import cn.edu.neu.elevator.actuator.ElevatorMotor;
 import cn.edu.neu.elevator.control.state.*;
+import cn.edu.neu.elevator.display.GUIController;
 import cn.edu.neu.elevator.linstener.DoorSensorListener;
 import cn.edu.neu.elevator.linstener.ElevatorPanelListener;
 import cn.edu.neu.elevator.linstener.FloorSensorListener;
+import javafx.application.Platform;
 
 /**
  * Elevator controller class
@@ -81,7 +83,6 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
         ELEVATOR_IDLE_OPEN_STATE.setContext(this);
         ELEVATOR_IDLE_CLOSED_STATE.setContext(this);
         ELEVATOR_IDLE_BLOCKED_STATE.setContext(this);
-
     }
 
     public ElevatorState getCurrentElevatorState() {
@@ -105,16 +106,19 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
      */
     @Override
     public void onDoorClosed() {
+        GUIController.getInstance().setDoorStatus("Closed");
         currentElevatorState.onDoorClosed();
     }
 
     @Override
     public void onDoorOpen() {
+        GUIController.getInstance().setDoorStatus("Open");
         currentElevatorState.onDoorOpen();
     }
 
     @Override
     public void onDoorBlocked() {
+        GUIController.getInstance().setDoorStatus("Blocked");
         currentElevatorState.onDoorBlocked();
     }
 
@@ -136,21 +140,7 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
     @Override
     public void onFloorReached() {
         currentElevatorState.onFloorReached(currentFloor, destinationFloor);
-        // continue to act the elevator motor if destination floor has not been reached
-        activateElevatorMotor();
-    }
-
-    /**
-     * Activate the motor if the current floor is not at the destination floor
-     */
-    private void activateElevatorMotor() {
-        if (currentFloor < destinationFloor) {
-            this.getElevatorMotor().goUp();
-        } else if (currentFloor > destinationFloor) {
-            this.getElevatorMotor().goDown();
-        } else {
-            this.getElevatorMotor().goBreak();
-        }
+        GUIController.getInstance().setTxtFloorIndicator(currentFloor);
     }
 
     @Override

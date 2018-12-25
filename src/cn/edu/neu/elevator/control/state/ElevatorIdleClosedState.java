@@ -31,7 +31,7 @@ public class ElevatorIdleClosedState extends ElevatorState{
         else if (context.getCurrentFloor() > floor)
             elevatorMotor.goDown();
         else
-            ElevatorLogger.warning("Invalid Operation", "Current floor equals destionation floor.");
+            ElevatorLogger.warning("Invalid Operation", "Current floor equals destination floor.");
     }
 
     @Override

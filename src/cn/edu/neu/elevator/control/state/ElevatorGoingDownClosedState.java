@@ -11,7 +11,7 @@ public class ElevatorGoingDownClosedState extends ElevatorState{
 
     @Override
     public void onDoorOpen() {
-        ElevatorLogger.error("Invalid Sensor Signal", "Received an invalid signal when running. Door is open unexpectedly.");
+        ElevatorLogger.error("Invalid Sensor Signal", "Received an invalid signal when running. Door has been open unexpectedly.");
     }
 
     @Override

@@ -2,7 +2,7 @@ package cn.edu.neu.elevator.display;
 
 import cn.edu.neu.elevator.external.ElevatorButton;
 import cn.edu.neu.elevator.external.Environment;
-import com.sun.tools.doclint.Env;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -68,7 +68,7 @@ public class GUIController {
      * @param text text to show
      */
     public void submitLogText(String text) {
-        txtAreaLogger.appendText(text+"\n");
+        Platform.runLater(()->txtAreaLogger.appendText(text+"\n"));
     }
 
     /**
@@ -76,7 +76,7 @@ public class GUIController {
      * @param floor
      */
     public void setTxtFloorIndicator(int floor) {
-        txtFloorIndicator.setText(floor+"F");
+        Platform.runLater(()->txtFloorIndicator.setText(floor+"F"));
     }
 
     /**
@@ -85,8 +85,10 @@ public class GUIController {
      * @param status the text status of elevator
      */
     public void setElevatorStatus(boolean isIdle, String status) {
-        txtStatus.setText(status);
-        progRunning.setVisible(!isIdle);
+        Platform.runLater(()-> {
+            txtStatus.setText(status);
+            progRunning.setVisible(!isIdle);
+        });
     }
 
     /**
@@ -95,17 +97,19 @@ public class GUIController {
      * @param diff the height to increase or decrease (minus)
      */
     public void adjustSliderHeight(double diff) {
-        double newValue = sliderFloor.getValue()+diff;
-        if(newValue<sliderFloor.getMin()) {
-            // too small value, set to minimum
-            sliderFloor.adjustValue(sliderFloor.getMin());
-        } else if (newValue>sliderFloor.getMax()) {
-            // too large value, set to maximum
-            sliderFloor.adjustValue(sliderFloor.getMax());
-        } else {
-            // valid value
-            sliderFloor.adjustValue(sliderFloor.getValue() + diff);
-        }
+        Platform.runLater(()-> {
+            double newValue = sliderFloor.getValue() + diff;
+            if (newValue < sliderFloor.getMin()) {
+                // too small value, set to minimum
+                sliderFloor.adjustValue(sliderFloor.getMin());
+            } else if (newValue > sliderFloor.getMax()) {
+                // too large value, set to maximum
+                sliderFloor.adjustValue(sliderFloor.getMax());
+            } else {
+                // valid value
+                sliderFloor.adjustValue(sliderFloor.getValue() + diff);
+            }
+        });
     }
 
     /**
@@ -113,14 +117,16 @@ public class GUIController {
      * @param diff the value to change (<=0: Closed; >=100:Open; otherwise: in the moving progress or blockDoor)
      */
     public void adjustDoorWidth(double diff) {
-        double newValue = progDoorIndicator.getProgress()+diff;
-        if(newValue < 0){
-            progDoorIndicator.setProgress(0);
-        } else if (newValue > 100) {
-            progDoorIndicator.setProgress(100);
-        } else {
-            progDoorIndicator.setProgress(newValue);
-        }
+        Platform.runLater(()-> {
+            double newValue = progDoorIndicator.getProgress() + diff;
+            if (newValue < 0) {
+                progDoorIndicator.setProgress(0);
+            } else if (newValue > 100) {
+                progDoorIndicator.setProgress(100);
+            } else {
+                progDoorIndicator.setProgress(newValue);
+            }
+        });
     }
 
     /**
@@ -128,7 +134,7 @@ public class GUIController {
      * @param status status text
      */
     public void setDoorStatus(String status) {
-        txtDoorStatus.setText(status);
+        Platform.runLater(()->txtDoorStatus.setText(status));
     }
 
     // Self action methods

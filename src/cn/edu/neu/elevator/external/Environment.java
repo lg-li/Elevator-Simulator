@@ -54,13 +54,13 @@ public class Environment {
                 GUIController.getInstance().adjustSliderHeight(runDistancePerStep);
                 try {
                     // simulate the time delay of elevator motor in physical environment
-                    Thread.sleep(50);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+            floorSensor.floorReached();
         }).start();
-        floorSensor.floorReached();
     }
 
     /**
@@ -74,13 +74,13 @@ public class Environment {
                 GUIController.getInstance().adjustDoorWidth(doorMoveDistancePerStep);
                 try {
                     // simulate the time delay of door motor in physical environment
-                    Thread.sleep(50);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                doorSensor.setCurrentDoorState(isGoingOpen?DoorState.OPEN:DoorState.CLOSED);
             }
         }).start();
-        floorSensor.floorReached();
     }
 
     /**
