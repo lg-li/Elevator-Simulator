@@ -3,27 +3,32 @@ package cn.edu.neu.elevator.control.state;
 public class ElevatorIdleBlockedState extends ElevatorState{
 
     @Override
-    public void closeDoor() {
+    public void onDoorClosed() {
 
     }
 
     @Override
-    public void openDoor() {
+    public void onDoorOpen() {
 
     }
 
     @Override
-    public void blockDoor() {
+    public void onDoorBlocked() {
 
     }
 
     @Override
-    public void goUp() {
+    public void onFloorButtonPressed(int floor) {
 
     }
 
     @Override
-    public void goDown() {
+    public void onOpenButtonPressed() {
+
+    }
+
+    @Override
+    public void onCloseButtonPressed() {
 
     }
 }
