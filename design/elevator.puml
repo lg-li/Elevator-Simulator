@@ -1,9 +1,11 @@
 @startuml
 
-class ElevatorController{
+class ElevatorController {
 - currentFloor: int
 - destinationFloor: int
 - currentElevatorState: ElevatorState
+- elevatorMotor: ElevatorMotor
+- doorMotor: DoorMotor
 + <<final>> MAX_FLOOR: int
 + {static} <<final>> DEFAULT_FLOOR: int
 + <<final>> ELEVATOR_GOING_UP_CLOSED_STATE: ElevatorGoingUpClosedState
@@ -12,7 +14,13 @@ class ElevatorController{
 + <<final>> ElevatorIdleClosedState: ELEVATOR_IDLE_CLOSED_STATE
 + <<final>> ElevatorIdleBlockedState: ELEVATOR_IDLE_BLOCKED_STATE
 + <<create>> ElevatorController(maxFloor: int)
-
++ onFloorButtonPressed(floor: int): void
++ onOpenButtonPressed(): void
++ opCloseButtonPressed(): void
++ onFloorReached(): void
++ onDoorOpen(): void
++ onDoorClose(): void
++ onDoorBlock():void
 }
 
 interface Listener {
@@ -39,6 +47,10 @@ Listener <|-down- DoorSensorListener
 Listener <|-down- ElevatorPanelListener
 Listener <|-down- FloorSensorListener
 
+
+ElevatorController .up.|> DoorSensorListener
+ElevatorController .up.|> ElevatorPanelListener
+ElevatorController .up.|> FloorSensorListener
 
 class Listenable {
 # listeners: List<Listener>
@@ -68,6 +80,8 @@ class FloorSensor {
 Listenable <|-down- DoorSensor
 Listenable <|-down- ElevatorPanel
 Listenable <|-down- FloorSensor
+Listenable -right-> Listener
+
 
 class Environment {
 - {static} INSTANCE: Environment
@@ -82,6 +96,9 @@ class Environment {
 + blockDoor(): void
 }
 
+Environment -up-> DoorSensor
+Environment -up-> ElevatorPanel
+Environment -up-> FloorSensor
 
 class ElevatorButton {
 - buttonType: Button
@@ -108,22 +125,68 @@ class ElevatorMotor {
 ElevatorController --> DoorMotor
 ElevatorController --> ElevatorMotor
 
-abstract class ElevatorState{
+abstract class ElevatorState {
+- context: ElevatorController
++ setContext(context: ElevatorController): void
++ {abstract} onFloorButtonPressed(floor: int): void
++ {abstract} onOpenButtonPressed(): void
++ {abstract} opCloseButtonPressed(): void
++ {abstract} onFloorReached(): void
++ {abstract} onDoorOpen(): void
++ {abstract} onDoorClose(): void
++ {abstract} onDoorBlock():void
 }
 
+ElevatorController o-right- ElevatorState
+
 class IdleOpenState {
++ onFloorButtonPressed(floor: int): void
++ onOpenButtonPressed(): void
++ opCloseButtonPressed(): void
++ onFloorReached(): void
++ onDoorOpen(): void
++ onDoorClose(): void
++ onDoorBlock():void
 }
 
 class IdleClosedState {
++ onFloorButtonPressed(floor: int): void
++ onOpenButtonPressed(): void
++ opCloseButtonPressed(): void
++ onFloorReached(): void
++ onDoorOpen(): void
++ onDoorClose(): void
++ onDoorBlock():void
 }
 
 class IdleBlockedState {
++ onFloorButtonPressed(floor: int): void
++ onOpenButtonPressed(): void
++ opCloseButtonPressed(): void
++ onFloorReached(): void
++ onDoorOpen(): void
++ onDoorClose(): void
++ onDoorBlock():void
 }
 
 class GoingUpClosedState {
++ onFloorButtonPressed(floor: int): void
++ onOpenButtonPressed(): void
++ opCloseButtonPressed(): void
++ onFloorReached(): void
++ onDoorOpen(): void
++ onDoorClose(): void
++ onDoorBlock():void
 }
 
 class GoingDownClosedState {
++ onFloorButtonPressed(floor: int): void
++ onOpenButtonPressed(): void
++ opCloseButtonPressed(): void
++ onFloorReached(): void
++ onDoorOpen(): void
++ onDoorClose(): void
++ onDoorBlock():void
 }
 
 ElevatorState <|-- IdleOpenState
