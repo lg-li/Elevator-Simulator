@@ -13,7 +13,7 @@ public class ElevatorIdleClosedState extends ElevatorState{
 
     @Override
     public void onDoorOpen() {
-        ElevatorLogger.info("valid operation", "Elevator is open.");
+        ElevatorLogger.info("Door Open", "Elevator is open.");
         context.setCurrentElevatorState(context.ELEVATOR_IDLE_OPEN_STATE);
     }
 
@@ -48,11 +48,6 @@ public class ElevatorIdleClosedState extends ElevatorState{
     @Override
     public void onCloseButtonPressed() {
         ElevatorLogger.warning("Invalid Operation", "Elevator is closed. Close door operation is invalid.");
-    }
-
-    @Override
-    public void onFloorReached(int current, int destination) {
-
     }
 
     @Override

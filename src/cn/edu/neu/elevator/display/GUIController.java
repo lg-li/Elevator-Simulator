@@ -168,7 +168,7 @@ public class GUIController {
      */
     @FXML
     public void onCloseDoorPressed(ActionEvent event) {
-        Environment.getInstance().pressButton(new ElevatorButton(ElevatorButton.ButtonType.OPEN_BUTTON));
+        Environment.getInstance().pressButton(new ElevatorButton(ElevatorButton.ButtonType.CLOSED_BUTTON));
     }
 
     /**

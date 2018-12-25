@@ -4,16 +4,15 @@ import cn.edu.neu.elevator.actuator.DoorMotor;
 import cn.edu.neu.elevator.util.ElevatorLogger;
 
 public class ElevatorIdleOpenState extends ElevatorState{
-
-
     @Override
     public void onDoorClosed() {
-        //doNothing
+        ElevatorLogger.info("Door Closed", "The elevator door has been closed.");
+        context.setCurrentElevatorState(context.ELEVATOR_IDLE_CLOSED_STATE);
     }
 
     @Override
     public void onDoorOpen() {
-        ElevatorLogger.error("Invalid Operation", "Elevator is open. Open door operation is invalid.");
+        ElevatorLogger.warning("Ignoring Signal", "The door is already opened.");
     }
 
     @Override
@@ -23,12 +22,12 @@ public class ElevatorIdleOpenState extends ElevatorState{
 
     @Override
     public void onFloorButtonPressed(int floor) {
-        ElevatorLogger.warning("Invalid Operation", "Elevator is open. Change floor operation is invalid.");
+        ElevatorLogger.warning("Invalid Operation", "Elevator is open.Close the floor before you change floor.");
     }
 
     @Override
     public void onOpenButtonPressed() {
-        ElevatorLogger.warning("Invalid Operation", "Elevator is open. Open door operation is invalid.");
+        ElevatorLogger.warning("Invalid Operation", "The door is already opened.");
     }
 
     @Override
