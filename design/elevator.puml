@@ -80,6 +80,7 @@ class FloorSensor {
 Listenable <|-down- DoorSensor
 Listenable <|-down- ElevatorPanel
 Listenable <|-down- FloorSensor
+Listenable -right-> Listener
 
 
 class Environment {
@@ -126,14 +127,14 @@ ElevatorController --> ElevatorMotor
 
 abstract class ElevatorState {
 - context: ElevatorController
-+ onFloorButtonPressed(floor: int): void
-+ onOpenButtonPressed(): void
-+ opCloseButtonPressed(): void
-+ onFloorReached(): void
-+ onDoorOpen(): void
-+ onDoorClose(): void
-+ onDoorBlock():void
 + setContext(context: ElevatorController): void
++ {abstract} onFloorButtonPressed(floor: int): void
++ {abstract} onOpenButtonPressed(): void
++ {abstract} opCloseButtonPressed(): void
++ {abstract} onFloorReached(): void
++ {abstract} onDoorOpen(): void
++ {abstract} onDoorClose(): void
++ {abstract} onDoorBlock():void
 }
 
 ElevatorController o-right- ElevatorState
