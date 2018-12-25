@@ -12,17 +12,8 @@ import cn.edu.neu.elevator.linstener.FloorSensorListener;
  */
 public class ElevatorController implements DoorSensorListener, ElevatorPanelListener, FloorSensorListener {
 
-    public ElevatorController(int maxFloor) {
-        MAX_FLOOR = maxFloor;
-        elevatorMotor = new ElevatorMotor();
-        doorMotor = new DoorMotor();
-        // initial state
-        currentElevatorState = ELEVATOR_IDLE_CLOSED_STATE;
-    }
-
-    public final int MAX_FLOOR;
-    static final int DEFAULT_FLOOR = 1;
-
+    int currentFloor;
+    int destinationFloor;
     /**
      * Predefined states with state pattern for elevator controller
      */
@@ -34,6 +25,21 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
 
     // state placeholder for elevator controller
     private ElevatorState currentElevatorState;
+
+
+    public ElevatorController(int maxFloor) {
+        MAX_FLOOR = maxFloor;
+        elevatorMotor = new ElevatorMotor();
+        doorMotor = new DoorMotor();
+        // initial state
+        currentElevatorState = ELEVATOR_IDLE_CLOSED_STATE;
+        currentFloor = 1;
+        destinationFloor = 1;
+    }
+
+    public final int MAX_FLOOR;
+    static final int DEFAULT_FLOOR = 1;
+
 
     public ElevatorState getCurrentElevatorState() {
         return currentElevatorState;
@@ -92,12 +98,32 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
 
     @Override
     public void onFloorReached() {
-        // forward call to state class
-        currentElevatorState.onFloorReached();
+        if (currentFloor < destinationFloor) {
+            currentFloor++;
+        } else if (currentFloor > destinationFloor) {
+            currentFloor--;
+        } else {
+            this.getElevatorMotor().goBreak();
+            return;
+        }
+        // continue to act the elevator motor if destination floor has not been reached
+        activateElevatorMotor();
+    }
+
+    /**
+     * Activate the motor if the current floor is not at the destination floor
+     */
+    private void activateElevatorMotor() {
+        if (currentFloor < destinationFloor) {
+            this.getElevatorMotor().goUp();
+        } else if (currentFloor > destinationFloor) {
+            this.getElevatorMotor().goDown();
+        } else {
+            this.getElevatorMotor().goBreak();
+        }
     }
 
     @Override
     public void update() {
-
     }
 }
