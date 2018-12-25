@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="536.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.neu.elevator.display.GUIController">
    <children>
       <SplitPane dividerPositions="0.3" layoutX="42.0" layoutY="60.0" prefHeight="400.0" prefWidth="556.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -13,9 +24,9 @@
                <children>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="366.0" prefWidth="155.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
                      <children>
-                        <Slider blockIncrement="1.0" layoutX="69.0" layoutY="129.0" majorTickUnit="1.0" max="20.0" minorTickCount="1" orientation="VERTICAL" prefHeight="398.0" prefWidth="63.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="5.0" />
-                        <ProgressBar layoutX="83.0" layoutY="342.0" prefHeight="45.0" prefWidth="45.0" progress="0.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                        <Label layoutX="115.0" layoutY="8.0" prefWidth="50.0" text="1" textAlignment="RIGHT" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <Slider fx:id="sliderFloor" blockIncrement="1.0" disable="true" layoutX="69.0" layoutY="129.0" majorTickUnit="1.0" max="20.0" minorTickCount="1" orientation="VERTICAL" prefHeight="398.0" prefWidth="63.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="5.0" />
+                        <ProgressBar fx:id="progDoorIndicator" layoutX="83.0" layoutY="342.0" prefHeight="45.0" prefWidth="45.0" progress="0.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                        <Label fx:id="txtFloorIndicator" layoutX="115.0" layoutY="8.0" prefWidth="50.0" text="1" textAlignment="RIGHT" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -24,6 +35,17 @@
                                  <stops>
                                     <Stop color="#2471b4" />
                                     <Stop color="#bfbfbf" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                        </Label>
+                        <Label fx:id="txtDoorStatus" layoutX="110.0" layoutY="301.0" text="Closed" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="5.0" />
+                        <Label layoutX="85.0" layoutY="286.0" text="Door status" AnchorPane.bottomAnchor="65.0" AnchorPane.rightAnchor="5.0">
+                           <textFill>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop color="#7e84a1" />
+                                    <Stop color="#2c76cb" offset="1.0" />
                                  </stops>
                               </LinearGradient>
                            </textFill>
@@ -38,8 +60,8 @@
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #0886e0;" text="Elevator Control" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <HBox layoutX="124.0" layoutY="258.0" prefHeight="67.0" prefWidth="437.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
-                        <ProgressIndicator />
-                        <Label prefHeight="100.0" prefWidth="115.0" text="Idle">
+                        <ProgressIndicator fx:id="progRunning" />
+                        <Label fx:id="txtStatus" prefHeight="100.0" prefWidth="115.0" text="Idle">
                            <font>
                               <Font size="36.0" />
                            </font>
@@ -85,7 +107,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="224.0" prefWidth="168.0">
                            <children>
-                              <TextArea fx:id="txtAreaLogger" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <TextArea fx:id="txtAreaLogger" disable="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                     </content>
