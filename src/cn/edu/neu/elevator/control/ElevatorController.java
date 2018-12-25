@@ -12,17 +12,19 @@ import cn.edu.neu.elevator.linstener.FloorSensorListener;
  */
 public class ElevatorController implements DoorSensorListener, ElevatorPanelListener, FloorSensorListener {
 
-    public ElevatorController(int maxFloor) {
-        MAX_FLOOR = maxFloor;
-        elevatorMotor = new ElevatorMotor();
-        doorMotor = new DoorMotor();
-        // initial state
-        currentElevatorState = ELEVATOR_IDLE_CLOSED_STATE;
-    }
-
+    private int currentFloor;
+    private int destinationFloor;
+    /**
+     * state placeholder for elevator controller
+     */
+    private ElevatorState currentElevatorState;
     public final int MAX_FLOOR;
-    static final int DEFAULT_FLOOR = 1;
-
+    public static final int DEFAULT_FLOOR = 1;
+    /**
+     * Actuators of elevator
+     */
+    private ElevatorMotor elevatorMotor;
+    private DoorMotor doorMotor;
     /**
      * Predefined states with state pattern for elevator controller
      */
@@ -32,8 +34,19 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
     public final ElevatorIdleClosedState ELEVATOR_IDLE_CLOSED_STATE = new ElevatorIdleClosedState();
     public final ElevatorIdleBlockedState ELEVATOR_IDLE_BLOCKED_STATE = new ElevatorIdleBlockedState();
 
-    // state placeholder for elevator controller
-    private ElevatorState currentElevatorState;
+
+
+
+    public ElevatorController(int maxFloor) {
+        MAX_FLOOR = maxFloor;
+        elevatorMotor = new ElevatorMotor();
+        doorMotor = new DoorMotor();
+        // initial state
+        currentElevatorState = ELEVATOR_IDLE_CLOSED_STATE;
+        currentFloor = DEFAULT_FLOOR;
+        destinationFloor = DEFAULT_FLOOR;
+    }
+
 
     public ElevatorState getCurrentElevatorState() {
         return currentElevatorState;
@@ -51,11 +64,7 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
         return doorMotor;
     }
 
-    /**
-     * Actuators of elevator
-     */
-    private ElevatorMotor elevatorMotor;
-    private DoorMotor doorMotor;
+
 
     /**
      * Methods implemented from listeners
@@ -92,12 +101,32 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
 
     @Override
     public void onFloorReached() {
-        // forward call to state class
-        currentElevatorState.onFloorReached();
+        if (currentFloor < destinationFloor) {
+            currentFloor++;
+        } else if (currentFloor > destinationFloor) {
+            currentFloor--;
+        } else {
+            this.getElevatorMotor().goBreak();
+            return;
+        }
+        // continue to act the elevator motor if destination floor has not been reached
+        activateElevatorMotor();
+    }
+
+    /**
+     * Activate the motor if the current floor is not at the destination floor
+     */
+    private void activateElevatorMotor() {
+        if (currentFloor < destinationFloor) {
+            this.getElevatorMotor().goUp();
+        } else if (currentFloor > destinationFloor) {
+            this.getElevatorMotor().goDown();
+        } else {
+            this.getElevatorMotor().goBreak();
+        }
     }
 
     @Override
     public void update() {
-
     }
 }
