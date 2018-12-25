@@ -1,5 +1,7 @@
 package cn.edu.neu.elevator;
 
+import cn.edu.neu.elevator.control.ElevatorController;
+import cn.edu.neu.elevator.external.Environment;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +19,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        Environment.getInstance().registerElevatorController(new ElevatorController(20));
         launch(args);
     }
 }

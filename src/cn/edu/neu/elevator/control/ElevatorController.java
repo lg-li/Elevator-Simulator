@@ -14,6 +14,23 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
 
     private int currentFloor;
     private int destinationFloor;
+
+    public int getCurrentFloor() {
+        return currentFloor;
+    }
+
+    public void setCurrentFloor(int currentFloor) {
+        this.currentFloor = currentFloor;
+    }
+
+    public int getDestinationFloor() {
+        return destinationFloor;
+    }
+
+    public void setDestinationFloor(int destinationFloor) {
+        this.destinationFloor = destinationFloor;
+    }
+
     /**
      * state placeholder for elevator controller
      */
@@ -34,9 +51,6 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
     public final ElevatorIdleClosedState ELEVATOR_IDLE_CLOSED_STATE = new ElevatorIdleClosedState();
     public final ElevatorIdleBlockedState ELEVATOR_IDLE_BLOCKED_STATE = new ElevatorIdleBlockedState();
 
-
-
-
     public ElevatorController(int maxFloor) {
         MAX_FLOOR = maxFloor;
         elevatorMotor = new ElevatorMotor();
@@ -46,7 +60,6 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
         currentFloor = DEFAULT_FLOOR;
         destinationFloor = DEFAULT_FLOOR;
     }
-
 
     public ElevatorState getCurrentElevatorState() {
         return currentElevatorState;
@@ -63,8 +76,6 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
     public DoorMotor getDoorMotor() {
         return doorMotor;
     }
-
-
 
     /**
      * Methods implemented from listeners
@@ -101,14 +112,7 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
 
     @Override
     public void onFloorReached() {
-        if (currentFloor < destinationFloor) {
-            currentFloor++;
-        } else if (currentFloor > destinationFloor) {
-            currentFloor--;
-        } else {
-            this.getElevatorMotor().goBreak();
-            return;
-        }
+        currentElevatorState.onFloorReached(currentFloor, destinationFloor);
         // continue to act the elevator motor if destination floor has not been reached
         activateElevatorMotor();
     }
