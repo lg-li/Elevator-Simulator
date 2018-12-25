@@ -18,7 +18,7 @@ public class ElevatorButton {
     }
 
     /**
-     * Constructor for open or close button (no need for button value)
+     * Constructor for openDoor or closeDoor button (no need for button value)
      * @param buttonType Button method
      */
     public ElevatorButton (ButtonType buttonType) {
@@ -26,7 +26,7 @@ public class ElevatorButton {
     }
 
     /**
-     * Constructor for open, close or floor button
+     * Constructor for openDoor, closeDoor or floor button
      * @param buttonType Button method
      * @param buttonValue Button value when type is floor button
      */

@@ -110,7 +110,7 @@ public class GUIController {
 
     /**
      * Elevator door delay simulation animation
-     * @param diff the value to change (<=0: Closed; >=100:Open; otherwise: in the moving progress or blocked)
+     * @param diff the value to change (<=0: Closed; >=100:Open; otherwise: in the moving progress or blockDoor)
      */
     public void adjustDoorWidth(double diff) {
         double newValue = progDoorIndicator.getProgress()+diff;
@@ -148,7 +148,7 @@ public class GUIController {
     }
 
     /**
-     * Forward press open button action to environment interface
+     * Forward press openDoor button action to environment interface
      * @param event JavaFX Action Event Injection
      */
     @FXML
@@ -157,7 +157,7 @@ public class GUIController {
     }
 
     /**
-     * Forward press close button action to environment interface
+     * Forward press closeDoor button action to environment interface
      * @param event JavaFX Action Event Injection
      */
     @FXML

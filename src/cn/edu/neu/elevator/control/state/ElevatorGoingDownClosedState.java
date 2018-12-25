@@ -3,17 +3,17 @@ package cn.edu.neu.elevator.control.state;
 public class ElevatorGoingDownClosedState extends ElevatorState{
 
     @Override
-    public void close() {
+    public void closeDoor() {
 
     }
 
     @Override
-    public void open() {
+    public void openDoor() {
 
     }
 
     @Override
-    public void blocked() {
+    public void blockDoor() {
 
     }
 

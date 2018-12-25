@@ -12,16 +12,14 @@ public abstract class ElevatorState {
         this.context = context;
     }
 
-    public abstract void close();
+    public abstract void closeDoor();
 
-    public abstract void open();
+    public abstract void openDoor();
 
-    public abstract void blocked();
+    public abstract void blockDoor();
 
     public abstract void goUp();
 
     public abstract void goDown();
-
-
 
 }

@@ -65,7 +65,7 @@ public class Environment {
 
     /**
      * Simulation the running state of motor in environment
-     * @param isGoingOpen if the door is going to open
+     * @param isGoingOpen if the door is going to openDoor
      */
     public void runDoorMotor(boolean isGoingOpen) {
         final double doorMoveDistancePerStep = isGoingOpen? 20:-20;

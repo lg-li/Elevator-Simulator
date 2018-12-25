@@ -15,7 +15,7 @@ public class DoorSensor extends Listenable {
     private DoorState currentDoorState;
     /**
      * 3 states for the door:
-     * Open, closed and blocked
+     * Open, closed and blockDoor
      */
     public enum DoorState {
         OPEN, CLOSED, BLOCKED;
