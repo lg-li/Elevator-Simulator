@@ -7,11 +7,11 @@ public class ElevatorLogger {
         GUIController.getInstance().submitLogText("INFO ["+producer+"] " + content);
     }
 
-    public void error(String producer, String content) {
+    public static void error(String producer, String content) {
         GUIController.getInstance().submitLogText("ERROR ["+producer+"] " + content);
     }
 
-    public void warning(String producer, String content) {
+    public static void warning(String producer, String content) {
         GUIController.getInstance().submitLogText("WARNING ["+producer+"] " + content);
     }
 }

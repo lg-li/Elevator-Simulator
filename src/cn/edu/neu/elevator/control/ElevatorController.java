@@ -12,7 +12,14 @@ import cn.edu.neu.elevator.linstener.FloorSensorListener;
  */
 public class ElevatorController implements DoorSensorListener, ElevatorPanelListener, FloorSensorListener {
 
+    /**
+     * Data attributes storing current floor
+     */
     private int currentFloor;
+
+    /**
+     * Data attributes storing destination floor
+     */
     private int destinationFloor;
 
     public int getCurrentFloor() {
@@ -42,16 +49,19 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
      */
     private ElevatorMotor elevatorMotor;
     private DoorMotor doorMotor;
+
     /**
      * Predefined states with state pattern for elevator controller
      */
     public final ElevatorGoingUpClosedState ELEVATOR_GOING_UP_CLOSED_STATE = new ElevatorGoingUpClosedState();
     public final ElevatorGoingDownClosedState ELEVATOR_GOING_DOWN_CLOSED_STATE = new ElevatorGoingDownClosedState();
     public final ElevatorIdleOpenState ELEVATOR_IDLE_OPEN_STATE = new ElevatorIdleOpenState();
+    public final ElevatorIdleClosingState ELEVATOR_IDLE_CLOSING_STATE = new ElevatorIdleClosingState();
     public final ElevatorIdleClosedState ELEVATOR_IDLE_CLOSED_STATE = new ElevatorIdleClosedState();
     public final ElevatorIdleBlockedState ELEVATOR_IDLE_BLOCKED_STATE = new ElevatorIdleBlockedState();
 
     public ElevatorController(int maxFloor) {
+        // initalize state context
         MAX_FLOOR = maxFloor;
         elevatorMotor = new ElevatorMotor();
         doorMotor = new DoorMotor();
@@ -59,6 +69,19 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
         currentElevatorState = ELEVATOR_IDLE_CLOSED_STATE;
         currentFloor = DEFAULT_FLOOR;
         destinationFloor = DEFAULT_FLOOR;
+        initializeStateContext();
+    }
+
+    /**
+     * Initialize the context reference of all states
+     */
+    private void initializeStateContext() {
+        ELEVATOR_GOING_UP_CLOSED_STATE.setContext(this);
+        ELEVATOR_GOING_DOWN_CLOSED_STATE.setContext(this);
+        ELEVATOR_IDLE_OPEN_STATE.setContext(this);
+        ELEVATOR_IDLE_CLOSED_STATE.setContext(this);
+        ELEVATOR_IDLE_BLOCKED_STATE.setContext(this);
+
     }
 
     public ElevatorState getCurrentElevatorState() {
@@ -82,32 +105,32 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
      */
     @Override
     public void onDoorClosed() {
-
+        currentElevatorState.onDoorClosed();
     }
 
     @Override
     public void onDoorOpen() {
-
+        currentElevatorState.onDoorOpen();
     }
 
     @Override
     public void onDoorBlocked() {
-
+        currentElevatorState.onDoorBlocked();
     }
 
     @Override
     public void onFloorButtonPressed(int floor) {
-
+        currentElevatorState.onFloorButtonPressed(floor);
     }
 
     @Override
     public void onOpenButtonPressed() {
-
+        currentElevatorState.onOpenButtonPressed();
     }
 
     @Override
     public void onCloseButtonPressed() {
-
+        currentElevatorState.onCloseButtonPressed();
     }
 
     @Override

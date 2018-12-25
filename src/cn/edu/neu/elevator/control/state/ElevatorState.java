@@ -9,6 +9,7 @@ public abstract class ElevatorState {
     public void setContext(ElevatorController context) {
         this.context = context;
     }
+
     public abstract void onDoorClosed();
 
     public abstract void onDoorOpen();
@@ -21,20 +22,6 @@ public abstract class ElevatorState {
 
     public abstract void onCloseButtonPressed();
 
-    public void onFloorReached(int current, int destination) {
-        if(current < destination){
-            context.getElevatorMotor().goDown();
-            context.setCurrentFloor(current-1);
-            context.setCurrentElevatorState(context.ELEVATOR_GOING_DOWN_CLOSED_STATE);
-        } else if(current > destination) {
-            context.getElevatorMotor().goUp();
-            context.setCurrentFloor(current+1);
-            context.setCurrentElevatorState(context.ELEVATOR_GOING_UP_CLOSED_STATE);
-        } else {
-            context.getElevatorMotor().goBreak();
-            context.setCurrentElevatorState(context.ELEVATOR_IDLE_CLOSED_STATE);
-            context.getDoorMotor().goOpen();
-        }
-    }
+    public abstract void onFloorReached(int current, int destination);
 
 }
