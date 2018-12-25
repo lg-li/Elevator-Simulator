@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public class Listenable {
-    private List<Listener> listeners = new ArrayList<>();
+    protected List<Listener> listeners = new ArrayList<>();
 
     public void attachListener(Listener listener){
         listeners.add(listener);
