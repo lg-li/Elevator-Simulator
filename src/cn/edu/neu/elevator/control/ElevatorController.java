@@ -12,8 +12,19 @@ import cn.edu.neu.elevator.linstener.FloorSensorListener;
  */
 public class ElevatorController implements DoorSensorListener, ElevatorPanelListener, FloorSensorListener {
 
-    int currentFloor;
-    int destinationFloor;
+    private int currentFloor;
+    private int destinationFloor;
+    /**
+     * state placeholder for elevator controller
+     */
+    private ElevatorState currentElevatorState;
+    public final int MAX_FLOOR;
+    public static final int DEFAULT_FLOOR = 1;
+    /**
+     * Actuators of elevator
+     */
+    private ElevatorMotor elevatorMotor;
+    private DoorMotor doorMotor;
     /**
      * Predefined states with state pattern for elevator controller
      */
@@ -23,8 +34,7 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
     public final ElevatorIdleClosedState ELEVATOR_IDLE_CLOSED_STATE = new ElevatorIdleClosedState();
     public final ElevatorIdleBlockedState ELEVATOR_IDLE_BLOCKED_STATE = new ElevatorIdleBlockedState();
 
-    // state placeholder for elevator controller
-    private ElevatorState currentElevatorState;
+
 
 
     public ElevatorController(int maxFloor) {
@@ -33,12 +43,9 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
         doorMotor = new DoorMotor();
         // initial state
         currentElevatorState = ELEVATOR_IDLE_CLOSED_STATE;
-        currentFloor = 1;
-        destinationFloor = 1;
+        currentFloor = DEFAULT_FLOOR;
+        destinationFloor = DEFAULT_FLOOR;
     }
-
-    public final int MAX_FLOOR;
-    static final int DEFAULT_FLOOR = 1;
 
 
     public ElevatorState getCurrentElevatorState() {
@@ -57,11 +64,7 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
         return doorMotor;
     }
 
-    /**
-     * Actuators of elevator
-     */
-    private ElevatorMotor elevatorMotor;
-    private DoorMotor doorMotor;
+
 
     /**
      * Methods implemented from listeners

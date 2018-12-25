@@ -1,5 +1,20 @@
 @startuml
 
+class ElevatorController{
+- currentFloor: int
+- destinationFloor: int
+- currentElevatorState: ElevatorState
++ <<final>> MAX_FLOOR: int
++ {static} <<final>> DEFAULT_FLOOR: int
++ <<final>> ELEVATOR_GOING_UP_CLOSED_STATE: ElevatorGoingUpClosedState
++ <<final>> ELEVATOR_GOING_DOWN_CLOSED_STATE: ElevatorGoingDownClosedState
++ <<final>> ELEVATOR_IDLE_OPEN_STATE: ElevatorIdleOpenState
++ <<final>> ElevatorIdleClosedState: ELEVATOR_IDLE_CLOSED_STATE
++ <<final>> ElevatorIdleBlockedState: ELEVATOR_IDLE_BLOCKED_STATE
++ <<create>> ElevatorController(maxFloor: int)
+
+}
+
 interface Listener {
 + update(): void
 }
@@ -23,6 +38,7 @@ interface FloorSensorListener {
 Listener <|-down- DoorSensorListener
 Listener <|-down- ElevatorPanelListener
 Listener <|-down- FloorSensorListener
+
 
 class Listenable {
 # listeners: List<Listener>
