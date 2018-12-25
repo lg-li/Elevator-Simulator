@@ -6,7 +6,7 @@ public class ElevatorGoingDownClosedState extends ElevatorState{
 
     @Override
     public void onDoorClosed() {
-        ElevatorLogger.error("Door Closed", "Received an signal indicating that the door is closed.");
+        ElevatorLogger.info("Door Closed", "Ignoring an signal indicating that the door is closed.");
     }
 
     @Override

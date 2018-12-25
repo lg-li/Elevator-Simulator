@@ -31,4 +31,9 @@ public class ElevatorIdleBlockedState extends ElevatorState{
     public void onCloseButtonPressed() {
 
     }
+
+    @Override
+    public void onFloorReached(int current, int destination) {
+
+    }
 }

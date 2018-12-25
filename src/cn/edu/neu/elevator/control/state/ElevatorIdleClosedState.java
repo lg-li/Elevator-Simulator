@@ -54,4 +54,9 @@ public class ElevatorIdleClosedState extends ElevatorState{
     public void onFloorReached(int current, int destination) {
 
     }
+
+    @Override
+    public void onFloorReached(int current, int destination) {
+
+    }
 }
