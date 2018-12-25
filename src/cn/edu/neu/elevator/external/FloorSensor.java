@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Floor Sensor Simulation Class
  */
-public class FloorSensor implements Listenable {
+public class FloorSensor extends Listenable {
 
     public FloorSensor () {
         listeners = new ArrayList<>();
@@ -19,22 +19,10 @@ public class FloorSensor implements Listenable {
         notifyEvent();
     }
 
-    private List<FloorSensorListener> listeners;
-
-    @Override
-    public void attachListener(Listener listener) {
-        listeners.add((FloorSensorListener) listener);
-    }
-
-    @Override
-    public void detachListener(Listener listener) {
-        listeners.remove(listener);
-    }
-
     @Override
     public void notifyEvent() {
-        for (FloorSensorListener listener : listeners) {
-            listener.onFloorReached();
+        for (Listener listener : listeners) {
+            ((FloorSensorListener)listener).onFloorReached();
         }
     }
 }
