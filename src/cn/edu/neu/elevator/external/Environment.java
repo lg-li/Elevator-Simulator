@@ -1,6 +1,7 @@
 package cn.edu.neu.elevator.external;
 
 import cn.edu.neu.elevator.control.ElevatorController;
+import cn.edu.neu.elevator.display.GUIController;
 import cn.edu.neu.elevator.external.DoorSensor.*;
 
 /**
@@ -42,23 +43,58 @@ public class Environment {
         floorSensor.attachListener(controller);
     }
 
-    public void floorReached(){
+    /**
+     * Simulation the running state of motor in environment
+     * @param isGoingUp if the running direction upwards
+     */
+    public void runElevatorMotor(boolean isGoingUp) {
+        final double runDistancePerStep = isGoingUp? 0.2:-0.2;
+        new Thread(() -> {
+            for(int i = 0; i<5; i++) {
+                GUIController.getInstance().adjustSliderHeight(runDistancePerStep);
+                try {
+                    // simulate the time delay of elevator motor in physical environment
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
         floorSensor.floorReached();
     }
 
+    /**
+     * Simulation the running state of motor in environment
+     * @param isGoingOpen if the door is going to open
+     */
+    public void runDoorMotor(boolean isGoingOpen) {
+        final double doorMoveDistancePerStep = isGoingOpen? 20:-20;
+        new Thread(() -> {
+            for(int i = 0; i < 5; i++) {
+                GUIController.getInstance().adjustDoorWidth(doorMoveDistancePerStep);
+                try {
+                    // simulate the time delay of door motor in physical environment
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        floorSensor.floorReached();
+    }
+
+    /**
+     * Notify the panel that a button has been pressed by user
+     * @param buttonPressed the button pressed
+     */
     public void pressButton(ElevatorButton buttonPressed) {
         elevatorPanel.press(buttonPressed);
     }
 
-    public void closeDoor() {
-        doorSensor.setCurrentDoorState(DoorState.CLOSED);
-    }
-
-    public void openDoor() {
-        doorSensor.setCurrentDoorState(DoorState.OPEN);
-    }
-
-    public void blockDoor() {
+    /**
+     * Trigger the door sensor to simulation the block of door
+     */
+    public void onDoorBlocked() {
         doorSensor.setCurrentDoorState(DoorState.BLOCKED);
     }
 }

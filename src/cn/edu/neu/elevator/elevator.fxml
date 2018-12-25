@@ -86,8 +86,9 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="60.0" prefWidth="376.0">
                            <children>
-                              <Button fx:id="btnOpenDoor" layoutX="26.0" layoutY="36.0" mnemonicParsing="false" text="Open" />
-                              <Button fx:id="btnCloseDoor" layoutX="117.0" layoutY="36.0" mnemonicParsing="false" text="Close" />
+                              <Button fx:id="btnOpenDoor" layoutX="14.0" layoutY="36.0" mnemonicParsing="false" onAction="#onOpenDoorPressed" text="Open" />
+                              <Button fx:id="btnCloseDoor" layoutX="74.0" layoutY="36.0" mnemonicParsing="false" onAction="#onCloseDoorPressed" text="Close" />
+                              <Button layoutX="135.0" layoutY="36.0" mnemonicParsing="false" onAction="#onBlockDoorPressed" text="Block" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -97,7 +98,7 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1647.0" prefWidth="1848.0">
                            <children>
                               <TextField fx:id="txtFloor" layoutX="14.0" layoutY="25.0" promptText="Floor to go..." />
-                              <Button fx:id="btnFloorSubmit" layoutX="14.0" layoutY="58.0" mnemonicParsing="false" text="Submit" />
+                              <Button fx:id="btnFloorSubmit" layoutX="14.0" layoutY="58.0" mnemonicParsing="false" onAction="#submitFloor" text="Submit" />
                            </children>
                         </AnchorPane>
                     </content>
