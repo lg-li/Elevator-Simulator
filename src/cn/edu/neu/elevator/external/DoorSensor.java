@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Door sensor simulation class
  */
-public class DoorSensor implements Listenable {
+public class DoorSensor extends Listenable {
 
     /**
      * 3 states for the door:
@@ -21,7 +21,6 @@ public class DoorSensor implements Listenable {
 
     public DoorSensor() {
         currentDoorState = DoorState.CLOSED;
-        listeners = new ArrayList<>();
     }
 
     private DoorState currentDoorState;
@@ -35,34 +34,23 @@ public class DoorSensor implements Listenable {
         notifyEvent();
     }
 
-    private List<DoorSensorListener> listeners;
-
-    @Override
-    public void attachListener(Listener listener) {
-        listeners.add((DoorSensorListener) listener);
-    }
-
-    @Override
-    public void detachListener(Listener listener) {
-        listeners.remove(listener);
-    }
 
     @Override
     public void notifyEvent() {
         switch (currentDoorState) {
             case OPEN:
-                for (DoorSensorListener doorListener : listeners) {
-                    doorListener.onDoorOpen();
+                for (Listener doorListener : listeners) {
+                    ((DoorSensorListener)doorListener).onDoorOpen();
                 }
                 break;
             case CLOSED:
-                for (DoorSensorListener doorListener : listeners) {
-                    doorListener.onDoorClosed();
+                for (Listener doorListener : listeners) {
+                    ((DoorSensorListener)doorListener).onDoorClosed();
                 }
                 break;
             case BLOCKED:
-                for (DoorSensorListener doorListener : listeners) {
-                    doorListener.onDoorBlocked();
+                for (Listener doorListener : listeners) {
+                    ((DoorSensorListener)doorListener).onDoorBlocked();
                 }
                 break;
         }

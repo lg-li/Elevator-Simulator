@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Panel sensor simulation class
  */
-public class ElevatorPanel implements Listenable{
+public class ElevatorPanel extends Listenable{
 
     public ElevatorPanel () {
         listeners = new ArrayList<>();
@@ -22,34 +22,23 @@ public class ElevatorPanel implements Listenable{
         notifyEvent();
     }
 
-    private List<ElevatorPanelListener> listeners;
-    @Override
-    public void attachListener(Listener listener) {
-        listeners.add((ElevatorPanelListener) listener);
-    }
-
-    @Override
-    public void detachListener(Listener listener) {
-        listeners.remove(listener);
-    }
-
     @Override
     public void notifyEvent() {
         if(buttonPressed != null) {
             switch (buttonPressed.getButtonType()) {
                 case OPEN_BUTTON:
-                    for (ElevatorPanelListener listener : listeners) {
-                        listener.onOpenButtonPressed();
+                    for (Listener listener : listeners) {
+                        ((ElevatorPanelListener)listener).onOpenButtonPressed();
                     }
                     break;
                 case CLOSED_BUTTON:
-                    for (ElevatorPanelListener listener : listeners) {
-                        listener.onCloseButtonPressed();
+                    for (Listener listener : listeners) {
+                        ((ElevatorPanelListener)listener).onCloseButtonPressed();
                     }
                     break;
                 case FLOOR_BUTTON:
-                    for (ElevatorPanelListener listener : listeners) {
-                        listener.onFloorButtonPressed(buttonPressed.getButtonValue());
+                    for (Listener listener : listeners) {
+                        ((ElevatorPanelListener)listener).onFloorButtonPressed(buttonPressed.getButtonValue());
                     }
                     break;
             }

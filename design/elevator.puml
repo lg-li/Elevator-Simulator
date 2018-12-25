@@ -1,0 +1,28 @@
+@startuml
+
+interface Listener {
+}
+
+interface DoorSensorListener {
++ onDoorClosed(): void
++ onDoorOpen(): void
++ onDoorBlocked(): void
+}
+
+interface ElevatorPanelListener{
++ onFloorButtonPressed(floor: int): void
++ onOpenButtonPressed(): void
++ onCloseButtonPressed(): void
+}
+
+interface FloorSensorListener {
++ onFloorReached(): void
+}
+
+Listener <|-down- DoorSensorListener
+Listener <|-down- ElevatorPanelListener
+Listener <|-down- FloorSensorListener
+
+
+
+@enduml

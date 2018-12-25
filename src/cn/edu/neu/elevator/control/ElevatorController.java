@@ -96,4 +96,8 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
         currentElevatorState.onFloorReached();
     }
 
+    @Override
+    public void update() {
+
+    }
 }
