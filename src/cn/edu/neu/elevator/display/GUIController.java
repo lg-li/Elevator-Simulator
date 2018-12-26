@@ -14,7 +14,7 @@ import javafx.scene.control.*;
  */
 public class GUIController {
 
-    public static GUIController instance;
+    private static GUIController instance;
 
     public GUIController() {
         instance = this;
@@ -29,18 +29,6 @@ public class GUIController {
      */
     @FXML
     private TextArea txtAreaLogger;
-
-    @FXML
-    private Button btnOpenDoor;
-
-    @FXML
-    private Button btnCloseDoor;
-
-    @FXML
-    private Button btnBlockDoor;
-
-    @FXML
-    private Button btnFloorSubmit;
 
     @FXML
     private TextField txtFloor;
@@ -73,7 +61,7 @@ public class GUIController {
 
     /**
      * set the indicator's floor
-     * @param floor
+     * @param floor floor value
      */
     public void setTxtFloorIndicator(int floor) {
         Platform.runLater(()->txtFloorIndicator.setText(floor+"F"));

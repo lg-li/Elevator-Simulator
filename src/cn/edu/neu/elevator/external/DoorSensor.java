@@ -1,10 +1,7 @@
 package cn.edu.neu.elevator.external;
 
-import cn.edu.neu.elevator.linstener.DoorSensorListener;
-import cn.edu.neu.elevator.linstener.Listener;
-
-import java.util.ArrayList;
-import java.util.List;
+import cn.edu.neu.elevator.control.listener.DoorSensorListener;
+import cn.edu.neu.elevator.control.listener.Listener;
 
 /**
  * Door sensor simulation class

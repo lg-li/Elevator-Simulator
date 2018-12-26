@@ -77,9 +77,9 @@ class FloorSensor {
 + notifyEvent(): void
 }
 
-Listenable <|-down- DoorSensor
-Listenable <|-down- ElevatorPanel
-Listenable <|-down- FloorSensor
+Listenable <|-down-- DoorSensor
+Listenable <|-down-- ElevatorPanel
+Listenable <|-down-- FloorSensor
 Listenable -right-> Listener
 
 
@@ -94,11 +94,13 @@ class Environment {
 + closeDoor(): void
 + openDoor(): void
 + blockDoor(): void
++ interruptElevatorMotor() : void
++ interruptDoorMotor(); void
 }
 
-Environment -up-> DoorSensor
-Environment -up-> ElevatorPanel
-Environment -up-> FloorSensor
+Environment -up--> DoorSensor
+Environment -up--> ElevatorPanel
+Environment -up--> FloorSensor
 
 class ElevatorButton {
 - buttonType: Button
@@ -109,6 +111,11 @@ class ElevatorButton {
 }
 
 ElevatorController ..> ElevatorButton
+ElevatorPanel ..> ElevatorButton
+
+ElevatorController --> DoorMotor
+ElevatorController --> ElevatorMotor
+
 
 class DoorMotor {
 + goOpen(): void
@@ -122,8 +129,8 @@ class ElevatorMotor {
 + goBreak(): void
 }
 
-ElevatorController --> DoorMotor
-ElevatorController --> ElevatorMotor
+DoorMotor --> Environment
+ElevatorMotor --> Environment
 
 abstract class ElevatorState {
 - context: ElevatorController
@@ -189,10 +196,10 @@ class GoingDownClosedState {
 + onDoorBlock():void
 }
 
-ElevatorState <|-- IdleOpenState
-ElevatorState <|-- IdleClosedState
-ElevatorState <|-- IdleBlockedState
-ElevatorState <|-- GoingUpClosedState
-ElevatorState <|-- GoingDownClosedState
+ElevatorState <|-up- IdleOpenState
+ElevatorState <|-up- IdleClosedState
+ElevatorState <|-right- IdleBlockedState
+ElevatorState <|-down- GoingUpClosedState
+ElevatorState <|-down- GoingDownClosedState
 
 @enduml

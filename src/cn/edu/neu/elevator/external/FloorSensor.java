@@ -1,10 +1,9 @@
 package cn.edu.neu.elevator.external;
 
-import cn.edu.neu.elevator.linstener.FloorSensorListener;
-import cn.edu.neu.elevator.linstener.Listener;
+import cn.edu.neu.elevator.control.listener.FloorSensorListener;
+import cn.edu.neu.elevator.control.listener.Listener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Floor Sensor Simulation Class

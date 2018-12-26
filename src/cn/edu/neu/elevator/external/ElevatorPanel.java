@@ -1,10 +1,9 @@
 package cn.edu.neu.elevator.external;
 
-import cn.edu.neu.elevator.linstener.ElevatorPanelListener;
-import cn.edu.neu.elevator.linstener.Listener;
+import cn.edu.neu.elevator.control.listener.ElevatorPanelListener;
+import cn.edu.neu.elevator.control.listener.Listener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Panel sensor simulation class
