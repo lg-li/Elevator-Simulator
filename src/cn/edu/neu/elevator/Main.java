@@ -1,9 +1,7 @@
 package cn.edu.neu.elevator;
 
-import cn.edu.neu.elevator.control.ElevatorController;
 import cn.edu.neu.elevator.display.DisabledDisplay;
 import cn.edu.neu.elevator.display.Display;
-import cn.edu.neu.elevator.external.Environment;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -18,7 +16,7 @@ public class Main extends Application {
     // default display is disabled
     private static Display display = new DisabledDisplay();
 
-    public static Display getDisplay(){
+    public static Display getDisplay() {
         return display;
     }
 

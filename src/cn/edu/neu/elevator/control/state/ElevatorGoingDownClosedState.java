@@ -1,7 +1,6 @@
 package cn.edu.neu.elevator.control.state;
 
 import cn.edu.neu.elevator.Main;
-import cn.edu.neu.elevator.display.GUIDisplay;
 import cn.edu.neu.elevator.util.ElevatorLogger;
 
 public class ElevatorGoingDownClosedState extends ElevatorState {

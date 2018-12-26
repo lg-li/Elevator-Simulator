@@ -2,7 +2,6 @@ package cn.edu.neu.elevator.external;
 
 import cn.edu.neu.elevator.Main;
 import cn.edu.neu.elevator.control.ElevatorController;
-import cn.edu.neu.elevator.display.GUIDisplay;
 import cn.edu.neu.elevator.external.DoorSensor.DoorState;
 import cn.edu.neu.elevator.util.ElevatorLogger;
 

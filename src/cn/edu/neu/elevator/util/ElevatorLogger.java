@@ -1,7 +1,6 @@
 package cn.edu.neu.elevator.util;
 
 import cn.edu.neu.elevator.Main;
-import cn.edu.neu.elevator.display.GUIDisplay;
 
 public class ElevatorLogger {
     public static void info(String producer, String content) {

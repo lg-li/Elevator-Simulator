@@ -7,7 +7,6 @@ import cn.edu.neu.elevator.control.listener.DoorSensorListener;
 import cn.edu.neu.elevator.control.listener.ElevatorPanelListener;
 import cn.edu.neu.elevator.control.listener.FloorSensorListener;
 import cn.edu.neu.elevator.control.state.*;
-import cn.edu.neu.elevator.display.GUIDisplay;
 
 /**
  * Elevator controller class
@@ -42,6 +41,7 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
      */
     private ElevatorMotor elevatorMotor;
     private DoorMotor doorMotor;
+
     public ElevatorController(int maxFloor) {
         // initialize state context
         MAX_FLOOR = maxFloor;
