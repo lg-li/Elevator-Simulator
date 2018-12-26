@@ -1,12 +1,13 @@
 package cn.edu.neu.elevator.control;
 
+import cn.edu.neu.elevator.Main;
 import cn.edu.neu.elevator.actuator.DoorMotor;
 import cn.edu.neu.elevator.actuator.ElevatorMotor;
 import cn.edu.neu.elevator.control.listener.DoorSensorListener;
 import cn.edu.neu.elevator.control.listener.ElevatorPanelListener;
 import cn.edu.neu.elevator.control.listener.FloorSensorListener;
 import cn.edu.neu.elevator.control.state.*;
-import cn.edu.neu.elevator.display.GUIController;
+import cn.edu.neu.elevator.display.GUIDisplay;
 
 /**
  * Elevator controller class
@@ -102,17 +103,17 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
      */
     @Override
     public void onDoorClosed() {
-        GUIController.getInstance().setElevatorStatus(true, "Idle");
-        GUIController.getInstance().setDoorStatus("Closed");
-        GUIController.getInstance().setDoorWidth(0);
+        Main.getDisplay().setElevatorStatus(true, "Idle");
+        Main.getDisplay().setDoorStatus("Closed");
+        Main.getDisplay().setDoorWidth(0);
         currentElevatorState.onDoorClosed();
     }
 
     @Override
     public void onDoorOpen() {
-        GUIController.getInstance().setElevatorStatus(true, "Idle");
-        GUIController.getInstance().setDoorStatus("Open");
-        GUIController.getInstance().setDoorWidth(1);
+        Main.getDisplay().setElevatorStatus(true, "Idle");
+        Main.getDisplay().setDoorStatus("Open");
+        Main.getDisplay().setDoorWidth(1);
         currentElevatorState.onDoorOpen();
     }
 
@@ -139,8 +140,8 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
     @Override
     public void onFloorReached() {
         currentElevatorState.onFloorReached(currentFloor, destinationFloor);
-        GUIController.getInstance().setTxtFloorIndicator(currentFloor);
-        GUIController.getInstance().setSliderHeight(currentFloor);
+        Main.getDisplay().setTxtFloorIndicator(currentFloor);
+        Main.getDisplay().setSliderHeight(currentFloor);
     }
 
     @Override

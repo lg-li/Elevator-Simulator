@@ -1,17 +1,18 @@
 package cn.edu.neu.elevator.util;
 
-import cn.edu.neu.elevator.display.GUIController;
+import cn.edu.neu.elevator.Main;
+import cn.edu.neu.elevator.display.GUIDisplay;
 
 public class ElevatorLogger {
     public static void info(String producer, String content) {
-        GUIController.getInstance().submitLogText("INFO [" + producer + "] " + content);
+        Main.getDisplay().submitLogText("INFO [" + producer + "] " + content);
     }
 
     public static void error(String producer, String content) {
-        GUIController.getInstance().submitLogText("ERROR [" + producer + "] " + content);
+        Main.getDisplay().submitLogText("ERROR [" + producer + "] " + content);
     }
 
     public static void warning(String producer, String content) {
-        GUIController.getInstance().submitLogText("WARNING [" + producer + "] " + content);
+        Main.getDisplay().submitLogText("WARNING [" + producer + "] " + content);
     }
 }

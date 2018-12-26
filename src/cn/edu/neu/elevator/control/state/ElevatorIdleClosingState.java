@@ -1,6 +1,7 @@
 package cn.edu.neu.elevator.control.state;
 
-import cn.edu.neu.elevator.display.GUIController;
+import cn.edu.neu.elevator.Main;
+import cn.edu.neu.elevator.display.GUIDisplay;
 import cn.edu.neu.elevator.util.ElevatorLogger;
 
 public class ElevatorIdleClosingState extends ElevatorState {
@@ -18,8 +19,8 @@ public class ElevatorIdleClosingState extends ElevatorState {
 
     @Override
     public void onDoorBlocked() {
-        GUIController.getInstance().setDoorStatus("Blocked");
-        GUIController.getInstance().setElevatorStatus(true, "Blocked");
+        Main.getDisplay().setDoorStatus("Blocked");
+        Main.getDisplay().setElevatorStatus(true, "Blocked");
         ElevatorLogger.info("Blocked", "Door was blocked when closing. Now you cannot operate the door for 5 seconds.");
         context.setCurrentElevatorState(context.ELEVATOR_IDLE_BLOCKED_STATE);
         context.getDoorMotor().goBreak();

@@ -1,6 +1,7 @@
 package cn.edu.neu.elevator.control.state;
 
-import cn.edu.neu.elevator.display.GUIController;
+import cn.edu.neu.elevator.Main;
+import cn.edu.neu.elevator.display.GUIDisplay;
 import cn.edu.neu.elevator.util.ElevatorLogger;
 
 public class ElevatorGoingDownClosedState extends ElevatorState {
@@ -41,7 +42,7 @@ public class ElevatorGoingDownClosedState extends ElevatorState {
             ElevatorLogger.info("Destination Reached", "Now went down at the destination " + destination + "F.");
             context.getElevatorMotor().goBreak();
             context.setCurrentElevatorState(context.ELEVATOR_IDLE_CLOSED_STATE);
-            GUIController.getInstance().setElevatorStatus(false, "Opening door...");
+            Main.getDisplay().setElevatorStatus(false, "Opening door...");
             context.getDoorMotor().goOpen();
         } else {
             ElevatorLogger.info("Floor Reached", "Now at " + context.getCurrentFloor() + "F and destination is " + destination + "F. Continue to go down.");

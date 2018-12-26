@@ -1,7 +1,8 @@
 package cn.edu.neu.elevator.control.state;
 
+import cn.edu.neu.elevator.Main;
 import cn.edu.neu.elevator.actuator.DoorMotor;
-import cn.edu.neu.elevator.display.GUIController;
+import cn.edu.neu.elevator.display.GUIDisplay;
 import cn.edu.neu.elevator.util.ElevatorLogger;
 
 public class ElevatorIdleClosedState extends ElevatorState {
@@ -24,18 +25,18 @@ public class ElevatorIdleClosedState extends ElevatorState {
 
     @Override
     public void onFloorButtonPressed(int floor) {
-        if (floor < 0 || floor > context.MAX_FLOOR) {
+        if (floor < 1 || floor > context.MAX_FLOOR) {
             ElevatorLogger.error("Invalid Input", "The floor is out of bound.");
             return;
         }
         context.setDestinationFloor(floor);
         if (context.getCurrentFloor() < floor) {
             context.getElevatorMotor().goUp();
-            GUIController.getInstance().setElevatorStatus(false, "Going up...");
+            Main.getDisplay().setElevatorStatus(false, "Going up...");
             context.setCurrentElevatorState(context.ELEVATOR_GOING_UP_CLOSED_STATE);
         } else if (context.getCurrentFloor() > floor) {
             context.getElevatorMotor().goDown();
-            GUIController.getInstance().setElevatorStatus(false, "Going down...");
+            Main.getDisplay().setElevatorStatus(false, "Going down...");
             context.setCurrentElevatorState(context.ELEVATOR_GOING_DOWN_CLOSED_STATE);
         } else
             ElevatorLogger.warning("Invalid Operation", "Current floor equals destination floor.");

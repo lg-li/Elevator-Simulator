@@ -1,163 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="380.0" minWidth="-Infinity"
-            prefHeight="440.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9.0.1"
-            fx:controller="cn.edu.neu.elevator.display.GUIController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="332.0" minWidth="-Infinity" prefHeight="380.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.neu.elevator.display.GUIDisplay">
     <children>
-        <SplitPane dividerPositions="0.23782234957020057" layoutX="42.0" layoutY="60.0" prefHeight="400.0"
-                   prefWidth="556.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane fx:id="mainPane" disable="true" dividerPositions="0.23782234957020057" layoutX="42.0" layoutY="60.0" prefHeight="400.0" prefWidth="556.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                     <children>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="366.0" prefWidth="155.0"
-                                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="366.0" prefWidth="155.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
                             <children>
-                                <Slider fx:id="sliderFloor" blockIncrement="1.0" layoutX="5.0" layoutY="5.0"
-                                        majorTickUnit="1.0" max="20.0" min="1.0" minorTickCount="1"
-                                        orientation="VERTICAL" prefHeight="356.0" prefWidth="78.0" showTickLabels="true"
-                                        showTickMarks="true" snapToTicks="true" value="1.0"
-                                        AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0"
-                                        AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="5.0"/>
-                                <ProgressBar fx:id="progDoorIndicator" layoutX="83.0" layoutY="342.0" prefHeight="45.0"
-                                             prefWidth="67.0" progress="0.0" AnchorPane.bottomAnchor="5.0"
-                                             AnchorPane.rightAnchor="5.0"/>
-                                <Label fx:id="txtFloorIndicator" alignment="CENTER" layoutX="115.0" layoutY="8.0"
-                                       prefHeight="33.0" prefWidth="65.0" text="1F" textAlignment="RIGHT"
-                                       AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                <Slider fx:id="sliderFloor" blockIncrement="1.0" layoutX="5.0" layoutY="5.0" majorTickUnit="1.0" max="20.0" min="1.0" minorTickCount="1" orientation="VERTICAL" prefHeight="356.0" prefWidth="78.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="5.0" />
+                                <ProgressBar fx:id="progDoorIndicator" layoutX="83.0" layoutY="342.0" prefHeight="45.0" prefWidth="67.0" progress="0.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                                <Label fx:id="txtFloorIndicator" alignment="CENTER" layoutX="115.0" layoutY="8.0" prefHeight="33.0" prefWidth="65.0" text="1F" textAlignment="RIGHT" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                     <font>
-                                        <Font size="25.0"/>
+                                        <Font size="25.0" />
                                     </font>
                                     <textFill>
                                         <LinearGradient endX="1.0" endY="1.0">
                                             <stops>
-                                                <Stop color="#2471b4"/>
-                                                <Stop color="#bfbfbf" offset="1.0"/>
+                                                <Stop color="#2471b4" />
+                                                <Stop color="#bfbfbf" offset="1.0" />
                                             </stops>
                                         </LinearGradient>
                                     </textFill>
                                 </Label>
-                                <Label fx:id="txtDoorStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="92.0"
-                                       layoutY="365.0" prefHeight="27.0" prefWidth="67.0" text="Closed"
-                                       textAlignment="CENTER" AnchorPane.bottomAnchor="14.0"
-                                       AnchorPane.rightAnchor="6.0">
+                                <Label fx:id="txtDoorStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="365.0" prefHeight="27.0" prefWidth="67.0" text="Closed" textAlignment="CENTER" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="6.0">
                                     <font>
-                                        <Font size="14.0"/>
+                                        <Font size="14.0" />
                                     </font>
                                     <textFill>
                                         <LinearGradient endX="1.0" endY="1.0">
                                             <stops>
-                                                <Stop color="#1d5c91"/>
-                                                <Stop color="#70a0f8" offset="1.0"/>
+                                                <Stop color="#1d5c91" />
+                                                <Stop color="#70a0f8" offset="1.0" />
                                             </stops>
                                         </LinearGradient>
                                     </textFill>
                                     <effect>
-                                        <DropShadow color="WHITE" height="5.0" radius="2.0" spread="0.45" width="5.0"/>
+                                        <DropShadow color="WHITE" height="5.0" radius="2.0" spread="0.45" width="5.0" />
                                     </effect>
                                 </Label>
-                                <Label layoutX="91.0" layoutY="332.0" text="Door status" AnchorPane.bottomAnchor="59.0"
-                                       AnchorPane.rightAnchor="5.0">
+                                <Label layoutX="91.0" layoutY="332.0" text="Door status" AnchorPane.bottomAnchor="59.0" AnchorPane.rightAnchor="5.0">
                                     <textFill>
                                         <LinearGradient endX="1.0" endY="1.0">
                                             <stops>
-                                                <Stop color="#7e84a1"/>
-                                                <Stop color="#2c76cb" offset="1.0"/>
+                                                <Stop color="#7e84a1" />
+                                                <Stop color="#2c76cb" offset="1.0" />
                                             </stops>
                                         </LinearGradient>
                                     </textFill>
                                 </Label>
                             </children>
                         </AnchorPane>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0"
-                               prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #0886e0;"
-                               text="Environment Simulation" textAlignment="CENTER" textFill="WHITE"
-                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #0886e0;" text="Environment Simulation" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="294.0">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="155.0"
-                               style="-fx-background-color: #0886e0;" text="Elevator Control" textAlignment="CENTER"
-                               textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                               AnchorPane.topAnchor="0.0"/>
-                        <HBox alignment="TOP_RIGHT" layoutX="124.0" layoutY="258.0" prefHeight="27.0" prefWidth="529.0"
-                              style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0"
-                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #0886e0;" text="Elevator Control" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <HBox alignment="TOP_RIGHT" layoutX="124.0" layoutY="258.0" prefHeight="27.0" prefWidth="529.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                             <children>
-                                <ProgressIndicator fx:id="progRunning" visible="false"/>
+                                <ProgressIndicator fx:id="progRunning" visible="false" />
                                 <Label fx:id="txtStatus" prefHeight="67.0" text="Idle">
                                     <font>
-                                        <Font size="36.0"/>
+                                        <Font size="36.0" />
                                     </font>
                                     <textFill>
                                         <LinearGradient endX="1.0" endY="1.0">
                                             <stops>
-                                                <Stop color="#2471b4"/>
-                                                <Stop color="#bfbfbf" offset="1.0"/>
+                                                <Stop color="#2471b4" />
+                                                <Stop color="#bfbfbf" offset="1.0" />
                                             </stops>
                                         </LinearGradient>
                                     </textFill>
                                     <padding>
-                                        <Insets left="5.0"/>
+                                        <Insets left="5.0" />
                                     </padding>
                                 </Label>
                             </children>
                             <padding>
-                                <Insets left="5.0" right="5.0"/>
+                                <Insets left="5.0" right="5.0" />
                             </padding>
                         </HBox>
-                        <TitledPane collapsible="false" layoutX="14.0" layoutY="39.0" prefHeight="119.0"
-                                    prefWidth="198.0" text="Door Operation" AnchorPane.leftAnchor="5.0"
-                                    AnchorPane.topAnchor="38.0">
+                        <TitledPane collapsible="false" layoutX="14.0" layoutY="39.0" prefHeight="119.0" prefWidth="198.0" text="Door Operation" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="38.0">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="60.0" prefWidth="376.0">
                                     <children>
-                                        <Button fx:id="btnOpenDoor" layoutX="14.0" layoutY="36.0"
-                                                mnemonicParsing="false" onAction="#onOpenDoorPressed" text="Open"/>
-                                        <Button fx:id="btnCloseDoor" layoutX="74.0" layoutY="36.0"
-                                                mnemonicParsing="false" onAction="#onCloseDoorPressed" text="Close"/>
-                                        <Button layoutX="135.0" layoutY="36.0" mnemonicParsing="false"
-                                                onAction="#onBlockDoorPressed" text="Block"/>
+                                        <Button fx:id="btnOpenDoor" layoutX="14.0" layoutY="36.0" mnemonicParsing="false" onAction="#onOpenDoorPressed" text="Open" />
+                                        <Button fx:id="btnCloseDoor" layoutX="74.0" layoutY="36.0" mnemonicParsing="false" onAction="#onCloseDoorPressed" text="Close" />
+                                        <Button layoutX="135.0" layoutY="36.0" mnemonicParsing="false" onAction="#onBlockDoorPressed" text="Block" />
                                     </children>
                                 </AnchorPane>
                             </content>
                         </TitledPane>
-                        <TitledPane collapsible="false" layoutX="5.0" layoutY="168.0" prefHeight="119.0"
-                                    prefWidth="198.0" text="Floor Operation" AnchorPane.leftAnchor="5.0"
-                                    AnchorPane.topAnchor="168.0">
+                        <TitledPane collapsible="false" layoutX="5.0" layoutY="168.0" prefHeight="119.0" prefWidth="198.0" text="Floor Operation" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="168.0">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1647.0" prefWidth="1848.0">
                                     <children>
-                                        <TextField fx:id="txtFloor" layoutX="14.0" layoutY="25.0"
-                                                   promptText="Floor to go..."/>
-                                        <Button fx:id="btnFloorSubmit" layoutX="14.0" layoutY="58.0"
-                                                mnemonicParsing="false" onAction="#submitFloor" text="Submit"/>
+                                        <TextField fx:id="txtFloor" layoutX="14.0" layoutY="25.0" promptText="Floor to go..." />
+                                        <Button fx:id="btnFloorSubmit" layoutX="14.0" layoutY="58.0" mnemonicParsing="false" onAction="#submitFloor" text="Submit" />
                                     </children>
                                 </AnchorPane>
                             </content>
                         </TitledPane>
-                        <Label layoutX="5.0" layoutY="368.0" prefHeight="27.0" prefWidth="378.0"
-                               text="Sensors are triggered by external environment (simulation)."
-                               AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"/>
-                        <TitledPane layoutX="215.0" layoutY="38.0" prefHeight="320.0" prefWidth="309.0" text="Logger"
-                                    AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="215.0"
-                                    AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="38.0">
+                        <Label layoutX="5.0" layoutY="368.0" prefHeight="27.0" prefWidth="378.0" text="Sensors are triggered by external environment (simulation)." AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                        <TitledPane layoutX="215.0" layoutY="38.0" prefHeight="320.0" prefWidth="309.0" text="Logger" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="215.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="38.0">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="307.0">
                                     <children>
-                                        <TextArea fx:id="txtAreaLogger" editable="false" prefHeight="200.0"
-                                                  prefWidth="200.0" promptText="Elevator Log will be shown here."
-                                                  wrapText="true" AnchorPane.bottomAnchor="0.0"
-                                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                                  AnchorPane.topAnchor="0.0"/>
+                                        <TextArea fx:id="txtAreaLogger" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Elevator Log will be shown here." wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     </children>
                                 </AnchorPane>
                             </content>
@@ -165,6 +133,23 @@
                     </children>
                 </AnchorPane>
             </items>
+         <effect>
+            <GaussianBlur fx:id="mainPaneGaussianBlur" />
+         </effect>
         </SplitPane>
+      <AnchorPane fx:id="initPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="20.0" layoutY="56.0" text="Initialize the max floor for this elevator simulator to continue" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="60.0" />
+            <Label layoutX="20.0" layoutY="24.0" text="Elevator Simulator" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnInit" layoutX="20.0" layoutY="137.0" mnemonicParsing="false" onAction="#onInit" text="Initialize" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="125.0" />
+            <TextField fx:id="txtFieldMaxFloor" layoutX="20.0" layoutY="93.0" prefHeight="23.0" prefWidth="279.0" promptText="Max floor for this elevator..." AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="90.0" />
+            <Label layoutX="25.0" layoutY="411.0" text="This program is for the assignment 2 of gourp 6 of DPSA course 2018 at NEU." AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" />
+            <Label layoutX="25.0" layoutY="325.0" text="By Bruce Lee (#20165254), Chenming Chang (#20164969) and Sherry Chen (#20165183)" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="25.0" />
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

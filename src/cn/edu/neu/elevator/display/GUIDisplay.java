@@ -1,23 +1,26 @@
 package cn.edu.neu.elevator.display;
 
+import cn.edu.neu.elevator.control.ElevatorController;
 import cn.edu.neu.elevator.external.ElevatorButton;
 import cn.edu.neu.elevator.external.Environment;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * GUI controller for elevator simulation
  * No logic of elevator included in this class.
  * Only public view operations provided.
  */
-public class GUIController {
+public class GUIDisplay extends Display {
 
-    private static GUIController instance;
     /**
      * FXML injection fields
      */
+
     @FXML
     private TextArea txtAreaLogger;
     @FXML
@@ -34,13 +37,21 @@ public class GUIController {
     private Label txtFloorIndicator;
     @FXML
     private Label txtDoorStatus;
+    @FXML
+    private SplitPane mainPane;
+    @FXML
+    private AnchorPane initPane;
+    @FXML
+    private GaussianBlur mainPaneGaussianBlur;
+    @FXML
+    private TextField txtFieldMaxFloor;
 
-    public GUIController() {
+    public GUIDisplay() {
         instance = this;
     }
 
-    public static GUIController getInstance() {
-        return instance;
+    public static GUIDisplay getInstance() {
+        return (GUIDisplay) instance;
     }
 
     /**
@@ -176,5 +187,24 @@ public class GUIController {
     @FXML
     public void onBlockDoorPressed(ActionEvent event) {
         Environment.getInstance().onDoorBlocked();
+    }
+
+    @FXML
+    public void onInit(ActionEvent event) {
+        int maxFloor;
+        try {
+            maxFloor = Integer.valueOf(txtFieldMaxFloor.getText());
+        } catch (Exception ex) {
+            txtFieldMaxFloor.setText("");
+            txtFieldMaxFloor.setPromptText("Input a valid number and click to try again");
+            return;
+        }
+        Environment.getInstance().registerElevatorController(new ElevatorController(maxFloor));
+        sliderFloor.setMax(maxFloor);
+        sliderFloor.setMin(1);
+        sliderFloor.setValue(1);
+        initPane.setVisible(false);
+        mainPaneGaussianBlur.setRadius(0);
+        mainPane.setDisable(false);
     }
 }

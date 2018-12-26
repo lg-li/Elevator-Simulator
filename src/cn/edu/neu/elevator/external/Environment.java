@@ -1,7 +1,8 @@
 package cn.edu.neu.elevator.external;
 
+import cn.edu.neu.elevator.Main;
 import cn.edu.neu.elevator.control.ElevatorController;
-import cn.edu.neu.elevator.display.GUIController;
+import cn.edu.neu.elevator.display.GUIDisplay;
 import cn.edu.neu.elevator.external.DoorSensor.DoorState;
 import cn.edu.neu.elevator.util.ElevatorLogger;
 
@@ -57,7 +58,7 @@ public class Environment {
         elevatorMotorThread = new Thread(() -> {
             try {
                 for (int i = 0; i < 5; i++) {
-                    GUIController.getInstance().adjustSliderHeight(runDistancePerStep);
+                    Main.getDisplay().adjustSliderHeight(runDistancePerStep);
                     // simulate the time delay of elevator motor in physical environment
                     Thread.sleep(100);
                 }
@@ -83,8 +84,7 @@ public class Environment {
         doorMotorThread = new Thread(() -> {
             try {
                 for (int i = 0; i < 10; i++) {
-                    GUIController.getInstance().adjustDoorWidth(doorMoveDistancePerStep);
-
+                    Main.getDisplay().adjustDoorWidth(doorMoveDistancePerStep);
                     // simulate the time delay of door motor in physical environment
                     Thread.sleep(50);
                 }
