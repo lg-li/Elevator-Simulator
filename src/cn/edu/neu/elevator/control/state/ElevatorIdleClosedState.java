@@ -28,12 +28,12 @@ public class ElevatorIdleClosedState extends ElevatorState{
         context.setDestinationFloor(floor);
         if (context.getCurrentFloor() < floor) {
             context.getElevatorMotor().goUp();
-            GUIController.getInstance().setElevatorStatus(false, "Going up");
+            GUIController.getInstance().setElevatorStatus(false, "Going up...");
             context.setCurrentElevatorState(context.ELEVATOR_GOING_UP_CLOSED_STATE);
         }
         else if (context.getCurrentFloor() > floor) {
             context.getElevatorMotor().goDown();
-            GUIController.getInstance().setElevatorStatus(false, "Going down");
+            GUIController.getInstance().setElevatorStatus(false, "Going down...");
             context.setCurrentElevatorState(context.ELEVATOR_GOING_DOWN_CLOSED_STATE);
         }
 

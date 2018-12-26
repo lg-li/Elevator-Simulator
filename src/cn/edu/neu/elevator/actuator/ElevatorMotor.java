@@ -16,6 +16,6 @@ public class ElevatorMotor {
     }
 
     public void goBreak(){
-
+        Environment.getInstance().interruptElevatorMotor();
     }
 }

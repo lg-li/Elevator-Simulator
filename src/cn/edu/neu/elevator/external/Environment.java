@@ -22,6 +22,9 @@ public class Environment {
         floorSensor = new FloorSensor();
     }
 
+    private Thread elevatorMotorThread;
+    private Thread doorMotorThread;
+
     /**
      * Get singleton instance of the Environment
      * @return the instance reference
@@ -49,7 +52,7 @@ public class Environment {
      */
     public void runElevatorMotor(boolean isGoingUp) {
         final double runDistancePerStep = isGoingUp? 0.2:-0.2;
-        new Thread(() -> {
+        elevatorMotorThread = new Thread(() -> {
             for(int i = 0; i<5; i++) {
                 GUIController.getInstance().adjustSliderHeight(runDistancePerStep);
                 try {
@@ -60,7 +63,12 @@ public class Environment {
                 }
             }
             floorSensor.floorReached();
-        }).start();
+        });
+        elevatorMotorThread.start();
+    }
+
+    public void interruptElevatorMotor() {
+        elevatorMotorThread.interrupt();
     }
 
     /**
@@ -69,7 +77,7 @@ public class Environment {
      */
     public void runDoorMotor(boolean isGoingOpen) {
         final double doorMoveDistancePerStep = isGoingOpen? 20:-20;
-        new Thread(() -> {
+        doorMotorThread = new Thread(() -> {
             for(int i = 0; i < 4; i++) {
                 GUIController.getInstance().adjustDoorWidth(doorMoveDistancePerStep);
                 try {
@@ -80,7 +88,12 @@ public class Environment {
                 }
             }
             doorSensor.setCurrentDoorState(isGoingOpen?DoorState.OPEN:DoorState.CLOSED);
-        }).start();
+        });
+        doorMotorThread.start();
+    }
+
+    public void interruptDoorMotor() {
+        doorMotorThread.interrupt();
     }
 
     /**

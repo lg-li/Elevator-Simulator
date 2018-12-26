@@ -16,6 +16,6 @@ public class DoorMotor {
     }
 
     public void goBreak(){
-
+        Environment.getInstance().interruptDoorMotor();
     }
 }

@@ -16,9 +16,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.neu.elevator.display.GUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="380.0" minWidth="-Infinity" prefHeight="440.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.neu.elevator.display.GUIController">
    <children>
-      <SplitPane dividerPositions="0.3" layoutX="42.0" layoutY="60.0" prefHeight="400.0" prefWidth="556.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.23782234957020057" layoutX="42.0" layoutY="60.0" prefHeight="400.0" prefWidth="556.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -58,9 +58,9 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="294.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #0886e0;" text="Elevator Control" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <HBox layoutX="124.0" layoutY="258.0" prefHeight="67.0" prefWidth="437.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <HBox alignment="TOP_RIGHT" layoutX="124.0" layoutY="258.0" prefHeight="27.0" prefWidth="529.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
-                        <ProgressIndicator fx:id="progRunning" />
+                        <ProgressIndicator fx:id="progRunning" visible="false" />
                         <Label fx:id="txtStatus" prefHeight="67.0" text="Idle">
                            <font>
                               <Font size="36.0" />
@@ -103,12 +103,12 @@
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <Label layoutX="5.0" layoutY="296.0" prefHeight="27.0" prefWidth="378.0" text="Sensors are triggered by external environment (simulation)." AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                  <TitledPane layoutX="215.0" layoutY="38.0" prefHeight="248.0" prefWidth="154.0" text="Logger" AnchorPane.bottomAnchor="112.0" AnchorPane.leftAnchor="215.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="38.0">
+                  <Label layoutX="5.0" layoutY="368.0" prefHeight="27.0" prefWidth="378.0" text="Sensors are triggered by external environment (simulation)." AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                  <TitledPane layoutX="215.0" layoutY="38.0" prefHeight="320.0" prefWidth="309.0" text="Logger" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="215.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="38.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="224.0" prefWidth="168.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="307.0">
                            <children>
-                              <TextArea fx:id="txtAreaLogger" disable="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <TextArea fx:id="txtAreaLogger" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Elevator Log will be shown here." wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                     </content>
