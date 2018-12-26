@@ -2,7 +2,7 @@ package cn.edu.neu.elevator.control.state;
 
 import cn.edu.neu.elevator.util.ElevatorLogger;
 
-public class ElevatorIdleBlockedState extends ElevatorState{
+public class ElevatorIdleBlockedState extends ElevatorState {
 
     @Override
     public void onDoorClosed() {
@@ -11,12 +11,13 @@ public class ElevatorIdleBlockedState extends ElevatorState{
 
     @Override
     public void onDoorOpen() {
-        ElevatorLogger.info("Blocked", "Open operation not allowed");
+        ElevatorLogger.info("Door Open", "Exit block state.");
+        context.setCurrentElevatorState(context.ELEVATOR_IDLE_OPEN_STATE);
     }
 
     @Override
     public void onDoorBlocked() {
-        ElevatorLogger.info("Blocked", "Ignored a block signal");
+        ElevatorLogger.info("Block Signal", "Already blocked. Ignoring block signal from sensor.");
     }
 
     @Override
@@ -27,7 +28,6 @@ public class ElevatorIdleBlockedState extends ElevatorState{
     @Override
     public void onOpenButtonPressed() {
         ElevatorLogger.info("Blocked", "Operation not allowed");
-
     }
 
     @Override

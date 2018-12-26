@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class FloorSensor extends Listenable {
 
-    public FloorSensor () {
+    public FloorSensor() {
         listeners = new ArrayList<>();
     }
 
@@ -21,7 +21,7 @@ public class FloorSensor extends Listenable {
     @Override
     public void notifyEvent() {
         for (Listener listener : listeners) {
-            ((FloorSensorListener)listener).onFloorReached();
+            ((FloorSensorListener) listener).onFloorReached();
         }
     }
 }

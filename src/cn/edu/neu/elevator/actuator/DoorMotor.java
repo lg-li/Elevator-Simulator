@@ -7,15 +7,15 @@ import cn.edu.neu.elevator.external.Environment;
  */
 public class DoorMotor {
 
-    public void goOpen(){
+    public void goOpen() {
         Environment.getInstance().runDoorMotor(true);
     }
 
-    public void goClose(){
+    public void goClose() {
         Environment.getInstance().runDoorMotor(false);
     }
 
-    public void goBreak(){
+    public void goBreak() {
         Environment.getInstance().interruptDoorMotor();
     }
 }

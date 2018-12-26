@@ -16,15 +16,14 @@ public class Environment {
     private DoorSensor doorSensor;
     private ElevatorPanel elevatorPanel;
     private FloorSensor floorSensor;
+    private Thread elevatorMotorThread;
+    private Thread doorMotorThread;
 
     private Environment() {
         doorSensor = new DoorSensor();
         elevatorPanel = new ElevatorPanel();
         floorSensor = new FloorSensor();
     }
-
-    private Thread elevatorMotorThread;
-    private Thread doorMotorThread;
 
     /**
      * Get singleton instance of the Environment

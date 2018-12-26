@@ -15,6 +15,25 @@ import javafx.scene.control.*;
 public class GUIController {
 
     private static GUIController instance;
+    /**
+     * FXML injection fields
+     */
+    @FXML
+    private TextArea txtAreaLogger;
+    @FXML
+    private TextField txtFloor;
+    @FXML
+    private ProgressIndicator progDoorIndicator;
+    @FXML
+    private ProgressIndicator progRunning;
+    @FXML
+    private Label txtStatus;
+    @FXML
+    private Slider sliderFloor;
+    @FXML
+    private Label txtFloorIndicator;
+    @FXML
+    private Label txtDoorStatus;
 
     public GUIController() {
         instance = this;
@@ -25,55 +44,31 @@ public class GUIController {
     }
 
     /**
-     * FXML injection fields
-     */
-    @FXML
-    private TextArea txtAreaLogger;
-
-    @FXML
-    private TextField txtFloor;
-
-    @FXML
-    private ProgressIndicator progDoorIndicator;
-
-    @FXML
-    private ProgressIndicator progRunning;
-
-    @FXML
-    private Label txtStatus;
-
-    @FXML
-    private Slider sliderFloor;
-
-    @FXML
-    private Label txtFloorIndicator;
-
-    @FXML
-    private Label txtDoorStatus;
-
-    /**
      * Submit the text to the log area
+     *
      * @param text text to show
      */
     public void submitLogText(String text) {
-        Platform.runLater(()->txtAreaLogger.appendText(text+"\n"));
+        Platform.runLater(() -> txtAreaLogger.appendText(text + "\n"));
     }
 
     /**
      * set the indicator's floor
+     *
      * @param floor floor value
      */
     public void setTxtFloorIndicator(int floor) {
-        Platform.runLater(()->txtFloorIndicator.setText(floor+"F"));
+        Platform.runLater(() -> txtFloorIndicator.setText(floor + "F"));
     }
 
     /**
      * Set the elevator status indicator
+     *
      * @param isIdle if the elevator is Idle
      * @param status the text status of elevator
      */
     public void setElevatorStatus(boolean isIdle, String status) {
-        Platform.runLater(()-> {
+        Platform.runLater(() -> {
             txtStatus.setText(status);
             progRunning.setVisible(!isIdle);
         });
@@ -82,10 +77,11 @@ public class GUIController {
     /**
      * Elevator running delay simulation animation method
      * this method provided a way to increase or decrease the height of the elevator cart
+     *
      * @param diff the height to increase or decrease (minus)
      */
     public void adjustSliderHeight(double diff) {
-        Platform.runLater(()-> {
+        Platform.runLater(() -> {
             double newValue = sliderFloor.getValue() + diff;
             if (newValue < sliderFloor.getMin()) {
                 // too small value, set to minimum
@@ -100,16 +96,17 @@ public class GUIController {
         });
     }
 
-    public void setSliderHeight(double value){
-        Platform.runLater(()->sliderFloor.setValue(value));
+    public void setSliderHeight(double value) {
+        Platform.runLater(() -> sliderFloor.setValue(value));
     }
 
     /**
      * Elevator door delay simulation animation
+     *
      * @param diff the value to change (<=0: Closed; >=100:Open; otherwise: in the moving progress or blockDoor)
      */
     public void adjustDoorWidth(double diff) {
-        Platform.runLater(()-> {
+        Platform.runLater(() -> {
             double newValue = progDoorIndicator.getProgress() + diff;
             if (newValue < 0) {
                 progDoorIndicator.setProgress(0);
@@ -121,17 +118,18 @@ public class GUIController {
         });
     }
 
-    public void setDoorWidth(double value){
-        Platform.runLater(()->progDoorIndicator.setProgress(value));
+    public void setDoorWidth(double value) {
+        Platform.runLater(() -> progDoorIndicator.setProgress(value));
     }
 
 
     /**
      * Set the status of door with a text
+     *
      * @param status status text
      */
     public void setDoorStatus(String status) {
-        Platform.runLater(()->txtDoorStatus.setText(status));
+        Platform.runLater(() -> txtDoorStatus.setText(status));
     }
 
     // Self action methods
@@ -152,6 +150,7 @@ public class GUIController {
 
     /**
      * Forward press openDoor button action to environment interface
+     *
      * @param event JavaFX Action Event Injection
      */
     @FXML
@@ -161,6 +160,7 @@ public class GUIController {
 
     /**
      * Forward press closeDoor button action to environment interface
+     *
      * @param event JavaFX Action Event Injection
      */
     @FXML
@@ -170,6 +170,7 @@ public class GUIController {
 
     /**
      * Trigger the sensor in environment to simulation the block of door
+     *
      * @param event JavaFX Action Event Injection
      */
     @FXML

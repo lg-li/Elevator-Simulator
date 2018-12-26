@@ -9,15 +9,15 @@ import java.util.List;
 public class Listenable {
     protected List<Listener> listeners = new ArrayList<>();
 
-    public void attachListener(Listener listener){
+    public void attachListener(Listener listener) {
         listeners.add(listener);
     }
 
-    public void detachListener(Listener listener){
+    public void detachListener(Listener listener) {
         listeners.remove(listener);
     }
 
-    public void notifyEvent(){
+    public void notifyEvent() {
         listeners.forEach(listener -> listener.update());
     }
 }

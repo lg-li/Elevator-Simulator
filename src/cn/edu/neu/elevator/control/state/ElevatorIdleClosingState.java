@@ -3,7 +3,7 @@ package cn.edu.neu.elevator.control.state;
 import cn.edu.neu.elevator.display.GUIController;
 import cn.edu.neu.elevator.util.ElevatorLogger;
 
-public class ElevatorIdleClosingState extends ElevatorState{
+public class ElevatorIdleClosingState extends ElevatorState {
     @Override
     public void onDoorClosed() {
         ElevatorLogger.info("Door Closed", "The elevator door has been closed.");
@@ -24,7 +24,7 @@ public class ElevatorIdleClosingState extends ElevatorState{
         context.setCurrentElevatorState(context.ELEVATOR_IDLE_BLOCKED_STATE);
         context.getDoorMotor().goBreak();
         // Thread to delay the block state automatic transition
-        new Thread(()->{
+        new Thread(() -> {
             // sleep for 5 seconds
             try {
                 Thread.sleep(5000);

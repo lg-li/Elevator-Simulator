@@ -116,7 +116,6 @@ ElevatorPanel ..> ElevatorButton
 ElevatorController --> DoorMotor
 ElevatorController --> ElevatorMotor
 
-
 class DoorMotor {
 + goOpen(): void
 + goClose(): void
