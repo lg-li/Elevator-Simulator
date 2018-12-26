@@ -1,19 +1,18 @@
 package cn.edu.neu.elevator.external;
 
-import cn.edu.neu.elevator.linstener.ElevatorPanelListener;
-import cn.edu.neu.elevator.linstener.Listener;
+import cn.edu.neu.elevator.control.listener.ElevatorPanelListener;
+import cn.edu.neu.elevator.control.listener.Listener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Panel sensor simulation class
  */
-public class ElevatorPanel extends Listenable{
+public class ElevatorPanel extends Listenable {
 
     private ElevatorButton buttonPressed;
 
-    public ElevatorPanel () {
+    public ElevatorPanel() {
         listeners = new ArrayList<>();
     }
 
@@ -24,21 +23,21 @@ public class ElevatorPanel extends Listenable{
 
     @Override
     public void notifyEvent() {
-        if(buttonPressed != null) {
+        if (buttonPressed != null) {
             switch (buttonPressed.getButtonType()) {
                 case OPEN_BUTTON:
                     for (Listener listener : listeners) {
-                        ((ElevatorPanelListener)listener).onOpenButtonPressed();
+                        ((ElevatorPanelListener) listener).onOpenButtonPressed();
                     }
                     break;
                 case CLOSED_BUTTON:
                     for (Listener listener : listeners) {
-                        ((ElevatorPanelListener)listener).onCloseButtonPressed();
+                        ((ElevatorPanelListener) listener).onCloseButtonPressed();
                     }
                     break;
                 case FLOOR_BUTTON:
                     for (Listener listener : listeners) {
-                        ((ElevatorPanelListener)listener).onFloorButtonPressed(buttonPressed.getButtonValue());
+                        ((ElevatorPanelListener) listener).onFloorButtonPressed(buttonPressed.getButtonValue());
                     }
                     break;
             }

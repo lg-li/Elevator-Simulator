@@ -4,7 +4,7 @@ import cn.edu.neu.elevator.actuator.DoorMotor;
 import cn.edu.neu.elevator.display.GUIController;
 import cn.edu.neu.elevator.util.ElevatorLogger;
 
-public class ElevatorIdleOpenState extends ElevatorState{
+public class ElevatorIdleOpenState extends ElevatorState {
     @Override
     public void onDoorClosed() {
         ElevatorLogger.info("Door Closed", "The elevator door has been closed.");

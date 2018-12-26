@@ -1,4 +1,4 @@
-package cn.edu.neu.elevator.linstener;
+package cn.edu.neu.elevator.control.listener;
 
 /**
  * A label interface to unify the all listeners

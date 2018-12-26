@@ -1,17 +1,16 @@
 package cn.edu.neu.elevator.external;
 
-import cn.edu.neu.elevator.linstener.FloorSensorListener;
-import cn.edu.neu.elevator.linstener.Listener;
+import cn.edu.neu.elevator.control.listener.FloorSensorListener;
+import cn.edu.neu.elevator.control.listener.Listener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Floor Sensor Simulation Class
  */
 public class FloorSensor extends Listenable {
 
-    public FloorSensor () {
+    public FloorSensor() {
         listeners = new ArrayList<>();
     }
 
@@ -22,7 +21,7 @@ public class FloorSensor extends Listenable {
     @Override
     public void notifyEvent() {
         for (Listener listener : listeners) {
-            ((FloorSensorListener)listener).onFloorReached();
+            ((FloorSensorListener) listener).onFloorReached();
         }
     }
 }

@@ -9,28 +9,21 @@ public class ElevatorButton {
     private int buttonValue;
 
     /**
-     * enum types for button types
-     */
-    public enum ButtonType {
-        OPEN_BUTTON,
-        CLOSED_BUTTON,
-        FLOOR_BUTTON
-    }
-
-    /**
      * Constructor for openDoor or closeDoor button (no need for button value)
+     *
      * @param buttonType Button method
      */
-    public ElevatorButton (ButtonType buttonType) {
+    public ElevatorButton(ButtonType buttonType) {
         this(buttonType, 0);
     }
 
     /**
      * Constructor for openDoor, closeDoor or floor button
-     * @param buttonType Button method
+     *
+     * @param buttonType  Button method
      * @param buttonValue Button value when type is floor button
      */
-    public ElevatorButton (ButtonType buttonType, int buttonValue) {
+    public ElevatorButton(ButtonType buttonType, int buttonValue) {
         this.buttonValue = buttonValue;
         this.buttonType = buttonType;
     }
@@ -49,5 +42,14 @@ public class ElevatorButton {
 
     public void setButtonValue(int buttonValue) {
         this.buttonValue = buttonValue;
+    }
+
+    /**
+     * enum types for button types
+     */
+    public enum ButtonType {
+        OPEN_BUTTON,
+        CLOSED_BUTTON,
+        FLOOR_BUTTON
     }
 }

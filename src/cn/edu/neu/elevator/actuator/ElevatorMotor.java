@@ -7,15 +7,15 @@ import cn.edu.neu.elevator.external.Environment;
  */
 public class ElevatorMotor {
 
-    public void goUp(){
+    public void goUp() {
         Environment.getInstance().runElevatorMotor(true);
     }
 
-    public void goDown(){
+    public void goDown() {
         Environment.getInstance().runElevatorMotor(false);
     }
 
-    public void goBreak(){
+    public void goBreak() {
         Environment.getInstance().interruptElevatorMotor();
     }
 }

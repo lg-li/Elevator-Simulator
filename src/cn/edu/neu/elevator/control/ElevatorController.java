@@ -2,26 +2,56 @@ package cn.edu.neu.elevator.control;
 
 import cn.edu.neu.elevator.actuator.DoorMotor;
 import cn.edu.neu.elevator.actuator.ElevatorMotor;
+import cn.edu.neu.elevator.control.listener.DoorSensorListener;
+import cn.edu.neu.elevator.control.listener.ElevatorPanelListener;
+import cn.edu.neu.elevator.control.listener.FloorSensorListener;
 import cn.edu.neu.elevator.control.state.*;
 import cn.edu.neu.elevator.display.GUIController;
-import cn.edu.neu.elevator.linstener.DoorSensorListener;
-import cn.edu.neu.elevator.linstener.ElevatorPanelListener;
-import cn.edu.neu.elevator.linstener.FloorSensorListener;
 
 /**
  * Elevator controller class
  */
 public class ElevatorController implements DoorSensorListener, ElevatorPanelListener, FloorSensorListener {
 
+    public static final int DEFAULT_FLOOR = 1;
+    public final int MAX_FLOOR;
+    /**
+     * Predefined states with state pattern for elevator controller
+     */
+    public final ElevatorGoingUpClosedState ELEVATOR_GOING_UP_CLOSED_STATE = new ElevatorGoingUpClosedState();
+    public final ElevatorGoingDownClosedState ELEVATOR_GOING_DOWN_CLOSED_STATE = new ElevatorGoingDownClosedState();
+    public final ElevatorIdleOpenState ELEVATOR_IDLE_OPEN_STATE = new ElevatorIdleOpenState();
+    public final ElevatorIdleClosingState ELEVATOR_IDLE_CLOSING_STATE = new ElevatorIdleClosingState();
+    public final ElevatorIdleClosedState ELEVATOR_IDLE_CLOSED_STATE = new ElevatorIdleClosedState();
+    public final ElevatorIdleBlockedState ELEVATOR_IDLE_BLOCKED_STATE = new ElevatorIdleBlockedState();
     /**
      * Data attributes storing current floor
      */
     private int currentFloor;
-
     /**
      * Data attributes storing destination floor
      */
     private int destinationFloor;
+    /**
+     * state placeholder for elevator controller
+     */
+    private ElevatorState currentElevatorState;
+    /**
+     * Actuators of elevator
+     */
+    private ElevatorMotor elevatorMotor;
+    private DoorMotor doorMotor;
+    public ElevatorController(int maxFloor) {
+        // initialize state context
+        MAX_FLOOR = maxFloor;
+        elevatorMotor = new ElevatorMotor();
+        doorMotor = new DoorMotor();
+        // initial state
+        currentElevatorState = ELEVATOR_IDLE_CLOSED_STATE;
+        currentFloor = DEFAULT_FLOOR;
+        destinationFloor = DEFAULT_FLOOR;
+        initializeStateContext();
+    }
 
     public int getCurrentFloor() {
         return currentFloor;
@@ -37,40 +67,6 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
 
     public void setDestinationFloor(int destinationFloor) {
         this.destinationFloor = destinationFloor;
-    }
-
-    /**
-     * state placeholder for elevator controller
-     */
-    private ElevatorState currentElevatorState;
-    public final int MAX_FLOOR;
-    public static final int DEFAULT_FLOOR = 1;
-    /**
-     * Actuators of elevator
-     */
-    private ElevatorMotor elevatorMotor;
-    private DoorMotor doorMotor;
-
-    /**
-     * Predefined states with state pattern for elevator controller
-     */
-    public final ElevatorGoingUpClosedState ELEVATOR_GOING_UP_CLOSED_STATE = new ElevatorGoingUpClosedState();
-    public final ElevatorGoingDownClosedState ELEVATOR_GOING_DOWN_CLOSED_STATE = new ElevatorGoingDownClosedState();
-    public final ElevatorIdleOpenState ELEVATOR_IDLE_OPEN_STATE = new ElevatorIdleOpenState();
-    public final ElevatorIdleClosingState ELEVATOR_IDLE_CLOSING_STATE = new ElevatorIdleClosingState();
-    public final ElevatorIdleClosedState ELEVATOR_IDLE_CLOSED_STATE = new ElevatorIdleClosedState();
-    public final ElevatorIdleBlockedState ELEVATOR_IDLE_BLOCKED_STATE = new ElevatorIdleBlockedState();
-
-    public ElevatorController(int maxFloor) {
-        // initalize state context
-        MAX_FLOOR = maxFloor;
-        elevatorMotor = new ElevatorMotor();
-        doorMotor = new DoorMotor();
-        // initial state
-        currentElevatorState = ELEVATOR_IDLE_CLOSED_STATE;
-        currentFloor = DEFAULT_FLOOR;
-        destinationFloor = DEFAULT_FLOOR;
-        initializeStateContext();
     }
 
     /**
