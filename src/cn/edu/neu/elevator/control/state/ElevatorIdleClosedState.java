@@ -25,6 +25,10 @@ public class ElevatorIdleClosedState extends ElevatorState{
 
     @Override
     public void onFloorButtonPressed(int floor) {
+        if (floor < 0 || floor > context.MAX_FLOOR) {
+            ElevatorLogger.error("Invalid Input", "The floor is out of bound.");
+            return;
+        }
         context.setDestinationFloor(floor);
         if (context.getCurrentFloor() < floor) {
             context.getElevatorMotor().goUp();
