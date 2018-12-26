@@ -108,7 +108,6 @@ public class GUIController {
             } else {
                 // valid value
                 sliderFloor.setValue(newValue);
-                System.out.println("V=" + newValue);
             }
         });
     }

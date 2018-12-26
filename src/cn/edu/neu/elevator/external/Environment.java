@@ -76,13 +76,13 @@ public class Environment {
      * @param isGoingOpen if the door is going to openDoor
      */
     public void runDoorMotor(boolean isGoingOpen) {
-        final double doorMoveDistancePerStep = isGoingOpen? 20:-20;
+        final double doorMoveDistancePerStep = isGoingOpen? 0.1:-0.1;
         doorMotorThread = new Thread(() -> {
-            for(int i = 0; i < 4; i++) {
+            for(int i = 0; i < 10; i++) {
                 GUIController.getInstance().adjustDoorWidth(doorMoveDistancePerStep);
                 try {
                     // simulate the time delay of door motor in physical environment
-                    Thread.sleep(200);
+                    Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
