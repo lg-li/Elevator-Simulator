@@ -133,6 +133,11 @@ public class GUIController {
         });
     }
 
+    public void setDoorWidth(double value){
+        Platform.runLater(()->progDoorIndicator.setProgress(value));
+    }
+
+
     /**
      * Set the status of door with a text
      * @param status status text
