@@ -62,7 +62,7 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
     public final ElevatorIdleBlockedState ELEVATOR_IDLE_BLOCKED_STATE = new ElevatorIdleBlockedState();
 
     public ElevatorController(int maxFloor) {
-        // initalize state context
+        // initialize state context
         MAX_FLOOR = maxFloor;
         elevatorMotor = new ElevatorMotor();
         doorMotor = new DoorMotor();

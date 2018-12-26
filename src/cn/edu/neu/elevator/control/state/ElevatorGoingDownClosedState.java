@@ -44,7 +44,7 @@ public class ElevatorGoingDownClosedState extends ElevatorState {
             GUIController.getInstance().setElevatorStatus(false, "Opening door...");
             context.getDoorMotor().goOpen();
         } else {
-            ElevatorLogger.info("Floor Reached", "Now at " + current + "F and destination is " + destination + "F. Continue to go down.");
+            ElevatorLogger.info("Floor Reached", "Now at " + context.getCurrentFloor() + "F and destination is " + destination + "F. Continue to go down.");
             context.getElevatorMotor().goDown();
         }
     }

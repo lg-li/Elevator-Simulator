@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -26,7 +27,7 @@
                      <children>
                         <Slider fx:id="sliderFloor" blockIncrement="1.0" layoutX="5.0" layoutY="5.0" majorTickUnit="1.0" max="20.0" min="1.0" minorTickCount="1" orientation="VERTICAL" prefHeight="356.0" prefWidth="78.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="5.0" />
                         <ProgressBar fx:id="progDoorIndicator" layoutX="83.0" layoutY="342.0" prefHeight="45.0" prefWidth="67.0" progress="0.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                        <Label fx:id="txtFloorIndicator" layoutX="115.0" layoutY="8.0" prefWidth="50.0" text="1F" textAlignment="RIGHT" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <Label fx:id="txtFloorIndicator" alignment="CENTER" layoutX="115.0" layoutY="8.0" prefHeight="33.0" prefWidth="65.0" text="1F" textAlignment="RIGHT" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -39,8 +40,22 @@
                               </LinearGradient>
                            </textFill>
                         </Label>
-                        <Label fx:id="txtDoorStatus" layoutX="110.0" layoutY="301.0" text="Closed" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="5.0" />
-                        <Label layoutX="85.0" layoutY="286.0" text="Door status" AnchorPane.bottomAnchor="65.0" AnchorPane.rightAnchor="5.0">
+                        <Label fx:id="txtDoorStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="365.0" prefHeight="27.0" prefWidth="67.0" text="Closed" textAlignment="CENTER" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="6.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <textFill>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop color="#1d5c91" />
+                                    <Stop color="#70a0f8" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                           <effect>
+                              <DropShadow color="WHITE" height="5.0" radius="2.0" spread="0.45" width="5.0" />
+                           </effect></Label>
+                        <Label layoutX="91.0" layoutY="332.0" text="Door status" AnchorPane.bottomAnchor="59.0" AnchorPane.rightAnchor="5.0">
                            <textFill>
                               <LinearGradient endX="1.0" endY="1.0">
                                  <stops>

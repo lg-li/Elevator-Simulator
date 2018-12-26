@@ -20,9 +20,10 @@ public class ElevatorIdleClosingState extends ElevatorState{
     public void onDoorBlocked() {
         GUIController.getInstance().setDoorStatus("Blocked");
         GUIController.getInstance().setElevatorStatus(true, "Blocked");
-        ElevatorLogger.info("Blocked", "Door was blocked when closing. Now you cannot close the door in 5 seconds.");
+        ElevatorLogger.info("Blocked", "Door was blocked when closing. Now you cannot operate the door for 5 seconds.");
         context.setCurrentElevatorState(context.ELEVATOR_IDLE_BLOCKED_STATE);
         context.getDoorMotor().goBreak();
+        // Thread to delay the block state automatic transition
         new Thread(()->{
             // sleep for 5 seconds
             try {
@@ -31,7 +32,6 @@ public class ElevatorIdleClosingState extends ElevatorState{
                 e.printStackTrace();
             }
             context.getDoorMotor().goOpen();
-            context.setCurrentElevatorState(context.ELEVATOR_IDLE_OPEN_STATE);
         }).start();
     }
 

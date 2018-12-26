@@ -3,6 +3,7 @@ package cn.edu.neu.elevator.external;
 import cn.edu.neu.elevator.control.ElevatorController;
 import cn.edu.neu.elevator.display.GUIController;
 import cn.edu.neu.elevator.external.DoorSensor.DoorState;
+import cn.edu.neu.elevator.util.ElevatorLogger;
 
 /**
  * Elevator Environment Simulation Class
@@ -90,7 +91,7 @@ public class Environment {
                 }
                 doorSensor.setCurrentDoorState(isGoingOpen ? DoorState.OPEN : DoorState.CLOSED);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                ElevatorLogger.info("Door Motor", "Motor has been interrupted by a block signal.");
             }
         });
         doorMotorThread.start();
