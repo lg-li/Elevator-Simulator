@@ -2,7 +2,7 @@ package cn.edu.neu.elevator.external;
 
 import cn.edu.neu.elevator.control.ElevatorController;
 import cn.edu.neu.elevator.display.GUIController;
-import cn.edu.neu.elevator.external.DoorSensor.*;
+import cn.edu.neu.elevator.external.DoorSensor.DoorState;
 
 /**
  * Elevator Environment Simulation Class
@@ -27,12 +27,13 @@ public class Environment {
 
     /**
      * Get singleton instance of the Environment
+     *
      * @return the instance reference
      */
-    public static Environment getInstance(){
-        if(INSTANCE == null) {
+    public static Environment getInstance() {
+        if (INSTANCE == null) {
             synchronized (Environment.class) {
-                if(INSTANCE == null) {
+                if (INSTANCE == null) {
                     INSTANCE = new Environment();
                 }
             }
@@ -40,7 +41,7 @@ public class Environment {
         return INSTANCE;
     }
 
-    public void registerElevatorController(ElevatorController controller){
+    public void registerElevatorController(ElevatorController controller) {
         doorSensor.attachListener(controller);
         elevatorPanel.attachListener(controller);
         floorSensor.attachListener(controller);
@@ -48,21 +49,22 @@ public class Environment {
 
     /**
      * Simulation the running state of motor in environment
+     *
      * @param isGoingUp if the running direction upwards
      */
     public void runElevatorMotor(boolean isGoingUp) {
-        final double runDistancePerStep = isGoingUp? 0.2:-0.2;
+        final double runDistancePerStep = isGoingUp ? 0.2 : -0.2;
         elevatorMotorThread = new Thread(() -> {
-            for(int i = 0; i<5; i++) {
-                GUIController.getInstance().adjustSliderHeight(runDistancePerStep);
-                try {
+            try {
+                for (int i = 0; i < 5; i++) {
+                    GUIController.getInstance().adjustSliderHeight(runDistancePerStep);
                     // simulate the time delay of elevator motor in physical environment
                     Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
+                floorSensor.floorReached();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            floorSensor.floorReached();
         });
         elevatorMotorThread.start();
     }
@@ -73,21 +75,23 @@ public class Environment {
 
     /**
      * Simulation the running state of motor in environment
+     *
      * @param isGoingOpen if the door is going to openDoor
      */
     public void runDoorMotor(boolean isGoingOpen) {
-        final double doorMoveDistancePerStep = isGoingOpen? 0.1:-0.1;
+        final double doorMoveDistancePerStep = isGoingOpen ? 0.1 : -0.1;
         doorMotorThread = new Thread(() -> {
-            for(int i = 0; i < 10; i++) {
-                GUIController.getInstance().adjustDoorWidth(doorMoveDistancePerStep);
-                try {
+            try {
+                for (int i = 0; i < 10; i++) {
+                    GUIController.getInstance().adjustDoorWidth(doorMoveDistancePerStep);
+
                     // simulate the time delay of door motor in physical environment
                     Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
+                doorSensor.setCurrentDoorState(isGoingOpen ? DoorState.OPEN : DoorState.CLOSED);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            doorSensor.setCurrentDoorState(isGoingOpen?DoorState.OPEN:DoorState.CLOSED);
         });
         doorMotorThread.start();
     }
@@ -98,6 +102,7 @@ public class Environment {
 
     /**
      * Notify the panel that a button has been pressed by user
+     *
      * @param buttonPressed the button pressed
      */
     public void pressButton(ElevatorButton buttonPressed) {

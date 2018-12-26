@@ -108,6 +108,7 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
     public void onDoorClosed() {
         GUIController.getInstance().setElevatorStatus(true, "Idle");
         GUIController.getInstance().setDoorStatus("Closed");
+        GUIController.getInstance().setDoorWidth(0);
         currentElevatorState.onDoorClosed();
     }
 
@@ -115,6 +116,7 @@ public class ElevatorController implements DoorSensorListener, ElevatorPanelList
     public void onDoorOpen() {
         GUIController.getInstance().setElevatorStatus(true, "Idle");
         GUIController.getInstance().setDoorStatus("Open");
+        GUIController.getInstance().setDoorWidth(1);
         currentElevatorState.onDoorOpen();
     }
 
