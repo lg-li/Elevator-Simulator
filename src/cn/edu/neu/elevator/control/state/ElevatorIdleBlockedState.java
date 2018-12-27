@@ -11,8 +11,7 @@ public class ElevatorIdleBlockedState extends ElevatorState {
 
     @Override
     public void onDoorOpen() {
-        ElevatorLogger.info("Door Open", "Exit block state.");
-        context.setCurrentElevatorState(context.ELEVATOR_IDLE_OPEN_STATE);
+        ElevatorLogger.error("Invalid Sensor Signal", "Received an invalid signal when running. Door has been opened unexpectedly.");
     }
 
     @Override
