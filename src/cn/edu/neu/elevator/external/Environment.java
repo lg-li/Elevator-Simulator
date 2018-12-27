@@ -63,7 +63,6 @@ public class Environment {
                 }
                 floorSensor.floorReached();
             } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         });
         elevatorMotorThread.start();
