@@ -1,5 +1,7 @@
 # Elevator Simulator #
 
+一个包含单例模式、观察者模式和状态模式的、基于 JavaFX 图形界面的电梯模拟器。
+
 ## System Design ##
 This system is a kind of closed-loop control system. The data flow transit between different types of classes in this system is shown in Figure.1 below.
 
